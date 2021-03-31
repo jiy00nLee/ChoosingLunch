@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.toyproject_client">
+
+    <application
+        android:usesCleartextTraffic="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Toyproject_client">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="l1wtb4qztp" />
+    </application>
+    <uses-permission android:name="android.permission.INTERNET" />  <!-- 사용자 인터넷 접속 허용 권한 획득-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 사용자 위치 정보 수집 권한 획득 (네트워크와 GPS - ver1) -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/> <!-- 사용자 위치 정보 수집 권한 획득 (네트워크와 GPS - ver2) -->
+</manifest>
