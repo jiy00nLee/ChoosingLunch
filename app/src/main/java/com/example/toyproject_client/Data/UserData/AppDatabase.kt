@@ -1,4 +1,4 @@
-package com.example.toyproject_client.Data.UserData
+package com.example.toyproject_client.data.UserData
 
 
 import android.content.Context

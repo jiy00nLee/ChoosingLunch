@@ -11,7 +11,6 @@
             android:id="@+id/MapLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/ContentLayout"
             app:layout_constraintVertical_weight="7"  >
@@ -39,8 +38,7 @@
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/MapLayout"
-            app:layout_constraintVertical_weight="1.5"
-            tools:layout_editor_absoluteX="0dp">
+            app:layout_constraintVertical_weight="1.5" >
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,7 +47,7 @@
                 android:layout_marginLeft="20dp"
                 >
                 <TextView
-                    android:id="@+id/username"
+                    android:id="@+id/userName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="고객"
@@ -71,7 +69,7 @@
                 android:layout_marginLeft="20dp"
                 >
                 <TextView
-                    android:id="@+id/userlocation"
+                    android:id="@+id/userLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="부산광역시 금정구 장전동 388-2"

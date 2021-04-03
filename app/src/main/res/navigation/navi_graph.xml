@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_homeFragment_to_insertLocationInfoFragment"
             app:destination="@id/insertLocationInfoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_storeInfoFragment"
+            app:destination="@id/storeInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/insertLocationInfoFragment"
@@ -20,4 +23,8 @@
             android:id="@+id/action_insertLocationInfoFragment_to_homeFragment"
             app:popUpTo="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/storeInfoFragment"
+        android:name="com.example.toyproject_client.storeInfoFragment"
+        android:label="storeInfoFragment" />
 </navigation>

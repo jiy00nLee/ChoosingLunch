@@ -43,7 +43,7 @@ interface KaKaoAPI {
         @Query("x") longitude: Double,  //[필수 구현] 입력받음(정보 o)
         @Query("y") latitude: Double,   //[필수 구현] 입력받음(정보 o)
         @Query("page") page : Int?, // [선택] 입력받음.
-        @Query("radius") radius: Int = 2000, //[필수 구현] 입력은 없지만 알아서 넣어줌(정보 o)
+        @Query("radius") radius: Int = 1000, //[필수 구현] 입력은 없지만 알아서 넣어줌(정보 o) (1km)
         @Query("sort") sortmode : String = "accuracy", // 정렬모드 : 기본 accuracy (or distance)
         @Query("size") size: Int = 15, // (최대) -한 문서당.
         @Query("category_group_code") category_group_code: String = "FD6", //알아서 넣어줌.

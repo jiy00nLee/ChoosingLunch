@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3f8fca66-6ae6-4bf2-89fa-cf96f3c39b30" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/Store_RecyclerViewAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/myserver/MyserverAPI.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/myserver/MyserverRepository.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/myserver/ResultSearchKeyword.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/storeInfoFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/view/HomeFragViewmodel.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable/store.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_storeinfo.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/store_menu_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/Data/UserData/AppDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/data/UserData/AppDatabase.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/Data/UserData/UserDataDao.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/data/UserData/UserDataDao.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/Data/UserData/UserDataEntity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/data/UserData/UserDataEntity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/Data/UserData/UserDataRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/data/UserData/UserDataRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/Data/UserData/UserDataViewmodel.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/Data/UserData/UserLocationItemData.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/data/UserData/UserLocationItemData.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/HomeFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/InsertLocationInfoFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/InsertLocationInfoFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/com/example/toyproject_client/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_home.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_insertlocationinfo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_insertlocationinfo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/store_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/store_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/navigation/navi_graph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/navigation/navi_graph.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/Configuration.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/Configuration.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/Database/Place.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/PlaceDatabase/Place.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/Database/PlaceRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/PlaceDatabase/PlaceRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/Database/PlaceService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/PlaceDatabase/PlaceService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/Database/SpringDatajpaPlaceRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/PlaceDatabase/SpringDataJpaPlaceRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/RestAPI/KakaoController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/MyserverController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/RestAPI/ResultSearchKeyword.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../toyproject_server/src/main/kotlin/com/example/toyproject_server/RestAPI/ResultSearchKeyword.kt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R52N80MWP2K]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="navigationResourceFile" />
+        <option value="Kotlin Interface" />
+        <option value="layoutResourceFile" />
+        <option value="Kotlin Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1qVU0092jyAjYGVfTL0VCLQZEcu" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$PROJECT_DIR$/../../../Android_Sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
+      <recent name="com.example.toyproject_client.view" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Programs\ZProjects\Final_Projects\ChoosingLunch\app\src\main\res\drawable" />
+      <recent name="C:\Programs\ZProjects\Final_Projects\ChoosingLunch\app\src\main\java\com\example\toyproject_client" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="toyproject_client.app" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="SKIP_NOOP_APK_INSTALLATIONS" value="true" />
+      <option name="FORCE_STOP_RUNNING_APP" value="true" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Hybrid>
+      <Java />
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Sample Java Methods" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3f8fca66-6ae6-4bf2-89fa-cf96f3c39b30" name="Default Changelist" comment="" />
+      <created>1617164023189</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617164023189</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="666" y="104" key="#app" timestamp="1617178713344">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="666" y="104" key="#app/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617178713344" />
+    <state x="690" y="275" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1617268113543">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="275" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617268113543" />
+    <state x="749" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1617236368911">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="749" y="236" key="#com.intellij.ide.util.MemberChooser/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617236368911" />
+    <state x="557" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1617323597308">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="557" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617323597308" />
+    <state x="630" y="308" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1617250158142">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="630" y="308" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617250158142" />
+    <state x="540" y="275" width="840" height="482" key="AndroidCreateResourceFileDialog" timestamp="1617267035954">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="540" y="275" width="840" height="482" key="AndroidCreateResourceFileDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617267035954" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1617190353669">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617190353669" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1617325889322">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617325889322" />
+    <state x="592" y="218" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1617278039499" />
+    <state width="1491" height="180" key="GridCell.Tab.0.bottom" timestamp="1617350321106">
+      <screen x="-1920" y="0" width="1536" height="832" />
+    </state>
+    <state width="1491" height="180" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1617350321106" />
+    <state width="1877" height="281" key="GridCell.Tab.0.bottom/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617330064646" />
+    <state width="1491" height="237" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1617179329553" />
+    <state width="1491" height="180" key="GridCell.Tab.0.center" timestamp="1617350321106">
+      <screen x="-1920" y="0" width="1536" height="832" />
+    </state>
+    <state width="1491" height="180" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1617350321106" />
+    <state width="1877" height="281" key="GridCell.Tab.0.center/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617330064646" />
+    <state width="1491" height="237" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1617179329553" />
+    <state width="1491" height="180" key="GridCell.Tab.0.left" timestamp="1617350321105">
+      <screen x="-1920" y="0" width="1536" height="832" />
+    </state>
+    <state width="1491" height="180" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1617350321105" />
+    <state width="1877" height="281" key="GridCell.Tab.0.left/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617330064646" />
+    <state width="1491" height="237" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1617179329552" />
+    <state width="1491" height="180" key="GridCell.Tab.0.right" timestamp="1617350321106">
+      <screen x="-1920" y="0" width="1536" height="832" />
+    </state>
+    <state width="1491" height="180" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@-1920.0.1536.832" timestamp="1617350321106" />
+    <state width="1877" height="281" key="GridCell.Tab.0.right/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617330064646" />
+    <state width="1491" height="237" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1617179329553" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1617190353670">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617190353670" />
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1617328775394">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617328775394" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1617194897904">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617194897904" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1617326825010">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1920.0.1536.832/0.0.1920.1040@0.0.1920.1040" timestamp="1617326825010" />
+  </component>
+</project>

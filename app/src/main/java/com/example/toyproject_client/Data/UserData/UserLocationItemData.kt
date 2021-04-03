@@ -1,8 +1,5 @@
-package com.example.toyproject_client.Data.UserData
+package com.example.toyproject_client.data.UserData
 
-
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 
 //@Parcelize
 data class UserLocationItemData (

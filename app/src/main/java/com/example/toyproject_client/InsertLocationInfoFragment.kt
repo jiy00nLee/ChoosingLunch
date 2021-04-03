@@ -12,13 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.getSystemService
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.toyproject_client.Data.UserData.UserDataViewmodel
-import com.example.toyproject_client.Data.UserData.UserLocationItemData
-import com.example.toyproject_client.databinding.FragmentInsertlocationinfoBinding
+import com.example.toyproject_client.view.HomeFragViewmodel
+import com.example.toyproject_client.data.UserData.UserLocationItemData
 import com.naver.maps.map.LocationTrackingMode
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
@@ -26,10 +24,9 @@ import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.util.FusedLocationSource
 import kotlinx.android.synthetic.main.fragment_insertlocationinfo.*
 import java.util.*
-import java.util.zip.Inflater
 
 class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
-    private val viewModel: UserDataViewmodel by viewModels()
+    private val viewModel: HomeFragViewmodel by viewModels()
 
     private var locationManager : LocationManager?= null //LocationManager
     private var connectionManager : ConnectivityManager?= null //WifiManager
@@ -39,7 +36,7 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
 
     companion object {
         private const val TAG = "Map"
-        private const val LOCATION_PERMISSION_REQUEST_CODE = 1000 //리퀘타임_상수
+        const val LOCATION_PERMISSION_REQUEST_CODE = 1000 //리퀘타임_상수
         private val PERMISSIONS = arrayOf<String>(
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION
@@ -53,7 +50,8 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
     private var address : String? = null
 
     //사용자 관련 변수들.
-    val appusername : String = "이지윤"   //로그인 구현 할때, 로그아웃 시 고려해주기.!!!
+    private lateinit var username : String
+    private lateinit var userlocation : String
 
 
     override fun onCreateView(
@@ -62,20 +60,16 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
 
-        val fm = childFragmentManager
-        val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?
-            ?: MapFragment.newInstance().also {     //mapFragment가 null일 경우.(새로 생성)
-                fm.beginTransaction().add(R.id.map, it).commit()  }
-
-        mapFragment.getMapAsync(this)
-        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-
         val rootView = inflater.inflate(R.layout.fragment_insertlocationinfo, container, false)
 
         //(가입시) 이미 정보가 있다는 가정하이다.
         viewModel.getUserLocationData().observe(viewLifecycleOwner){
-           username.text = it.username
-           userlocation.text = it.address
+            username = it.username
+            userlocation = it.address
+
+            userName.text = username
+            userLocation.text = userlocation
+
         }
 
         return rootView
@@ -83,6 +77,7 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        makeMapView()
 
         //사용자 위치 정보 서버에 입력하기.
         inputlocation_btn.setOnClickListener {
@@ -106,6 +101,16 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
             else naverMap?.locationTrackingMode = LocationTrackingMode.None
             return
         }
+    }
+
+    private fun makeMapView(){
+        val fm = childFragmentManager
+        val mapFragment = fm.findFragmentById(R.id.map) as MapFragment?
+                ?: MapFragment.newInstance().also {     //mapFragment가 null일 경우.(새로 생성)
+                    fm.beginTransaction().add(R.id.map, it).commit()  }
+
+        mapFragment.getMapAsync(this)
+        locationSource = FusedLocationSource(this, InsertLocationInfoFragment.LOCATION_PERMISSION_REQUEST_CODE)
     }
 
     override fun onMapReady(naverMap: NaverMap) {   //이게 oncreated같은 개념 맞나? -> 그래서 여기 버튼 onclick 넣음
@@ -164,17 +169,15 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
 
     private fun findLocationAddress(){
         val geoCoder = Geocoder(context, Locale.getDefault())
-        addresslist =  geoCoder.getFromLocation(nowLat, nowLng, 1) //위도,경도 -> 주소로 변환                                            //이거 정리해야함.
-        address = addresslist!!.get(0).getAddressLine(0) //geoCoder가 잡은 주소가 없지 않을 때!
-        viewModel.insertUserLocationData(UserLocationItemData(appusername,  address.toString(), nowLng, nowLat))
+        addresslist =  geoCoder.getFromLocation(nowLat, nowLng, 1) //위도,경도 -> 주소로 변환
+        address = addresslist!!.get(0).getAddressLine(0)
+        viewModel.insertUserLocationData(UserLocationItemData(username,  address.toString(), nowLat, nowLng))
         // Toast.makeText(context, "위치 :  "+ "${addresslist}", Toast.LENGTH_SHORT).show()
 
         makeLocationMarker()
     }
 
-    private fun makeLocationMarker(){
-        // 현재 위치 -> 지도상에 마커 표시
-
+    private fun makeLocationMarker(){  // 현재 위치 -> 지도상에 마커 표시 (귀찮다. -> 나중에 마무리할때 하기 !!!!)
         //이전에 저장되어 있던 정보를 가져와서 띄우기.
         /*
         marker?.map = null  //이전 마커 지우기.

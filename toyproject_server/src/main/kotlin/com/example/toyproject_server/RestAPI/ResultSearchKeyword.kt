@@ -32,18 +32,18 @@ data class RegionInfo (
 //@SerializedName -> 변수명과 Json key값을 다르게 사용하고 싶은 경우 (어노테이션) 사용.
 data class PlaceDocument (
     //@SerializedName("address_name")
-    val id: String = "",
-    val address_name: String = "",
-    val category_group_code: String = "", //중요 카테고리만 그룹핑한 카테고리 '그룹 코드'
-    val category_group_name: String = "", //중요 카테고리만 그룹핑한 카테고리 '그룹명'
-    val category_name: String = "",
-    val distance: String = "",
-    val phone: String = "",
-    val place_name: String = "",
-    val place_url: String = "",    //장소 상세페이지 URL
-    val road_address_name: String = "",
-    val x: Double? = null, // longitude
-    val y: Double? = null //  latitude
+    var id: String = "",
+    var address_name: String = "",
+    var category_group_code: String = "", //중요 카테고리만 그룹핑한 카테고리 '그룹 코드'
+    var category_group_name: String = "", //중요 카테고리만 그룹핑한 카테고리 '그룹명'
+    var category_name: String = "",
+    var phone: String = "",
+    var place_name: String = "",
+    var place_url: String = "",    //장소 상세페이지 URL
+    var road_address_name: String = "",
+    var x: Double? = null, // longitude
+    var y: Double? = null, //  latitude
+    var distance: Double? = null //distance
 )
 
 //(추가공부) 페이징으로 15개 이상받아오기?

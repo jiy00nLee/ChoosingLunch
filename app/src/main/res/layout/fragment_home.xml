@@ -44,7 +44,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/TitleLayout"
-        app:layout_constraintVertical_weight="8"
+        app:layout_constraintVertical_weight="15"
         tools:layout_editor_absoluteX="0dp">
 
         <LinearLayout
@@ -54,6 +54,12 @@
             android:gravity="center"
             android:background="@color/design_default_color_primary_dark"
             android:padding="20dp">
+            <Button
+                android:id="@+id/all_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="전체" />
 
             <Button
                 android:id="@+id/korean_btn"
@@ -82,22 +88,13 @@
                 android:layout_height="wrap_content"
                 android:text="양식" />
         </LinearLayout>
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="0dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scrollbars="vertical"
-                    tools:listitem="@layout/store_item" >
-                </androidx.recyclerview.widget.RecyclerView>
-            </LinearLayout>
-        </ScrollView>
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/store_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
