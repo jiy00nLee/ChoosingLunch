@@ -1,7 +1,6 @@
 package com.example.toyproject_client.myserver
 
-import com.example.toyproject_client.data.UserData.AppDatabase
-import com.example.toyproject_client.data.UserData.UserDataRepository
+import com.example.toyproject_client.data.AppDatabase
 
 class MyserverRepository {
 

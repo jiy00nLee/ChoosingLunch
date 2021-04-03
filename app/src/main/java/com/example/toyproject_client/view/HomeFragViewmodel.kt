@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.toyproject_client.data.UserData.AppDatabase
+import com.example.toyproject_client.data.AppDatabase
 import com.example.toyproject_client.data.UserData.UserDataRepository
 import com.example.toyproject_client.data.UserData.UserLocationItemData
 import com.example.toyproject_client.myserver.Myserver

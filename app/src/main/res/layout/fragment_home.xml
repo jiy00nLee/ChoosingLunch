@@ -46,55 +46,20 @@
         app:layout_constraintTop_toBottomOf="@id/TitleLayout"
         app:layout_constraintVertical_weight="15"
         tools:layout_editor_absoluteX="0dp">
-
-        <LinearLayout
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/menu_bottom_navigation"
+            android:id="@+id/main_bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:background="@color/design_default_color_primary_dark"
-            android:padding="20dp">
-            <Button
-                android:id="@+id/all_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="전체" />
-
-            <Button
-                android:id="@+id/korean_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="한식" />
-
-            <Button
-                android:id="@+id/chinese_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="중식" />
-
-            <Button
-                android:id="@+id/japanese_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:text="일식" />
-
-            <Button
-                android:id="@+id/west_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="양식" />
-        </LinearLayout>
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@color/white"
+            android:layout_alignParentTop="true"/>
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/main_pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="vertical"
-            tools:listitem="@layout/store_item"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="0dp"
+            android:layout_weight="1"  />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

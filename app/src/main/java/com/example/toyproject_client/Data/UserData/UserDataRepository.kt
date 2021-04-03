@@ -2,7 +2,7 @@ package com.example.toyproject_client.data.UserData
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.example.toyproject_client.myserver.Myserver
+import com.example.toyproject_client.data.AppDatabase
 
 class UserDataRepository(locationdatabase: AppDatabase){
 

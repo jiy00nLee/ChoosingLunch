@@ -9,8 +9,11 @@ data class UserDataEntity (
 
     //후에 id 추가해줘야함. -> 이름은 primary X.
     @PrimaryKey
-    @ColumnInfo(name="userName")
-    val username : String,
+    @ColumnInfo(name="id")
+    val id : String,
+
+    @ColumnInfo
+    val addressname : String,
 
     @ColumnInfo(name="userAddress")
     val address : String,

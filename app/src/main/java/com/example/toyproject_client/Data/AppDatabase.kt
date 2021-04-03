@@ -1,4 +1,4 @@
-package com.example.toyproject_client.data.UserData
+package com.example.toyproject_client.data
 
 
 import android.content.Context
@@ -6,6 +6,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.toyproject_client.data.FavoriteStore.FavoriteStoreDao
+import com.example.toyproject_client.data.UserData.UserDataDao
+import com.example.toyproject_client.data.UserData.UserDataEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -13,6 +16,7 @@ import kotlinx.coroutines.launch
 @Database(entities = [UserDataEntity::class], version = 5, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun UserDataDao(): UserDataDao
+    abstract fun FavoriteStoreDao() : FavoriteStoreDao
 
     companion object {
         @Volatile

@@ -17,10 +17,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.toyproject_client.view.HomeFragViewmodel
 import com.example.toyproject_client.data.UserData.UserLocationItemData
-import com.naver.maps.map.LocationTrackingMode
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.*
 import com.naver.maps.map.util.FusedLocationSource
 import kotlinx.android.synthetic.main.fragment_insertlocationinfo.*
 import java.util.*
@@ -118,6 +116,7 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
         this.naverMap = naverMap
         naverMap!!.locationSource = locationSource // 초기 위치 설정(주의:locationSource!= latitude)
         naverMap!!.locationTrackingMode = LocationTrackingMode.Follow     //권한 허용시(카메라 따라가게 모드 설정 o)
+        this.naverMap = naverMap
 
         requestPermissions(PERMISSIONS,LOCATION_PERMISSION_REQUEST_CODE  )
         Toast.makeText(context, "사용자 위치를 찾고 있는 중입니다.", Toast.LENGTH_SHORT).show()
@@ -174,15 +173,6 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
         viewModel.insertUserLocationData(UserLocationItemData(username,  address.toString(), nowLat, nowLng))
         // Toast.makeText(context, "위치 :  "+ "${addresslist}", Toast.LENGTH_SHORT).show()
 
-        makeLocationMarker()
-    }
-
-    private fun makeLocationMarker(){  // 현재 위치 -> 지도상에 마커 표시 (귀찮다. -> 나중에 마무리할때 하기 !!!!)
-        //이전에 저장되어 있던 정보를 가져와서 띄우기.
-        /*
-        marker?.map = null  //이전 마커 지우기.
-        marker?.position = LatLng(nowLat, nowLng)
-        marker?.map = naverMap */
     }
 
 
