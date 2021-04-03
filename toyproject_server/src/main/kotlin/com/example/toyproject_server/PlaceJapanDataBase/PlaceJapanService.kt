@@ -27,7 +27,7 @@ class PlaceJapanService {
 
 
         while (true){
-            resultSearchedData = kakaoapi.getSearchLocationFromKakaoServer(query, userLng, userLat, page_num)?.execute()?.body()
+            resultSearchedData = kakaoapi.getSearchLocationFromKakaoServer(query, userLat, userLng, page_num)?.execute()?.body()
             meta = resultSearchedData?.meta
             places = resultSearchedData?.documents
             transed_places = places?.map {it -> mappingPlaceDocumenttoPlace(it)}
