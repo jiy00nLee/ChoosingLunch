@@ -1,5 +1,6 @@
 package com.example.toyproject_server.PlaceWesternDataBase
 
+import com.example.toyproject_server.PlaceDatabase.Place
 import com.example.toyproject_server.PlaceJapanDataBase.PlaceJapan
 import com.example.toyproject_server.PlaceKoreanDataBase.PlaceKorean
 import com.example.toyproject_server.RestAPI.KaKaoAPI
@@ -8,6 +9,7 @@ import com.example.toyproject_server.RestAPI.PlaceMeta
 import com.example.toyproject_server.RestAPI.ResultSearchKeyword
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.transaction.annotation.Transactional
+import kotlin.math.*
 
 
 @Transactional
@@ -44,10 +46,38 @@ class PlaceWesternService {
     }
 
     fun getAll(query: String, userLng : Double, userLat: Double) : List<PlaceDocument>{
-        val places =  placeRepository.findByCategorygroupnameAndXAndY(query, userLng, userLat)
-        println("gotten from db "+ places)
-        return places.map { it ->  mappingPlacetoPlaceDocument(it) }
+        val listPlaces : List<PlaceWestern> = placeRepository.findAll()
+        println(listPlaces)
+
+        //리스트를 통째로 넘겨준 후 거리계산해서 해당되는 애들만 거리순으로 정리해 리스트 추출하기.
+        val selectedlist : MutableList<PlaceWestern> = mutableListOf()
+        listPlaces.forEach { place ->
+            if (calculateDistance(userLng, userLat, place)) {
+                selectedlist.add(place)
+            }
+        }
+        println(selectedlist)
+        return selectedlist.map{it -> mappingPlacetoPlaceDocument(it)} //변환 된 값 넣어줘야 함.
     }
+
+
+    private fun calculateDistance(x: Double, y : Double, place : PlaceWestern) : Boolean {
+        val theta : Double = place.x!! - x
+        var distance : Double = Math.sin(Math.toRadians(place.y!!)) * Math.sin(Math.toRadians(y)) + Math.cos(
+            Math.toRadians(
+                (place.y!!)
+            )
+        ) * Math.cos(Math.toRadians((y))) * Math.cos(Math.toRadians(theta))
+
+        distance = Math.acos(distance)
+        distance = Math.toDegrees(distance)
+        distance = distance*60*(1.1515)*(0.1609344) //단위 : 킬로미터(km) -> 원래는 1.609344를 곱해줘야함.
+
+        println(place.placename + distance)
+        if (distance < 1000) {return true}  //1km이내인 정보만 출력해줌.
+        return false
+    }
+
 
     private fun mappingPlaceDocumenttoPlace(placeDocument: PlaceDocument) : PlaceWestern {
         val place : PlaceWestern = PlaceWestern()

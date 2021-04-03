@@ -6,5 +6,7 @@ interface PlaceChineseRepository {
 
     fun save(place : PlaceChinese?)
 
+    fun findAll() : List<PlaceChinese>
+
     fun findByCategorygroupnameAndXAndY(query: String, userLng : Double, userLat: Double) : List<PlaceChinese>
 }

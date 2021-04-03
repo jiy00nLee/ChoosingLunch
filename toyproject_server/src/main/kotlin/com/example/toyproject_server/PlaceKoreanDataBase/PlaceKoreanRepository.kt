@@ -6,5 +6,7 @@ interface PlaceKoreanRepository {
 
     fun save(place : PlaceKorean?)
 
+    fun findAll() : List<PlaceKorean>
+
     fun findByCategorygroupnameAndXAndY(query: String, userLng : Double, userLat: Double) : List<PlaceKorean>
 }

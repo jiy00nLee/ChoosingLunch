@@ -6,12 +6,14 @@ import com.example.toyproject_server.RestAPI.PlaceMeta
 import com.example.toyproject_server.RestAPI.ResultSearchKeyword
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.transaction.annotation.Transactional
+import java.lang.Math.*
+
 
 @Transactional
 class PlaceService {
+    private val R = 6372.8 * 1000
 
     private val placeRepository : PlaceRepository
-
     @Autowired
     constructor(placeRepository: PlaceRepository){
         this.placeRepository = placeRepository
@@ -25,7 +27,6 @@ class PlaceService {
         var meta : PlaceMeta?
         var places : List<PlaceDocument>?
         var transed_places : List<Place>?
-
 
         while (true){
 
@@ -41,31 +42,67 @@ class PlaceService {
 
     }
 
-
     fun getAll(query: String, userLng : Double, userLat: Double) : List<PlaceDocument>{
-        val places: List<Place> =  placeRepository.findByCategorygroupnameAndXAndY(query, userLng, userLat) //getAll로 바꾸기.
-        println("gotten from db "+ places)
-        return places.map { it ->  mappingPlacetoPlaceDocument(it) }    //이때 타입을 바꿔주면 안될듯 (return값 "엔티티" )
-    }
-/*
-    fun getLocationItems(query: String, userLng : Double, userLat: Double) : List<PlaceDocument>{
-        val allEntities : List<Place> = placeRepository.findAll()
-        allEntities?.forEach {  place ->
-            calculateDistance(userLng,userLat, place) //  나중에 인풋으로 거리값 넣어주기!(ex.몇키로 이내)
+        val listPlaces : List<Place> = placeRepository.findAll()
+        println(listPlaces)
+
+        //리스트를 통째로 넘겨준 후 거리계산해서 해당되는 애들만 거리순으로 정리해 리스트 추출하기.
+        val selectedlist : MutableList<Place> = mutableListOf()
+        listPlaces.forEach { place ->
+            if (calculateDistance(userLng, userLat, place)) {
+                selectedlist.add(place)
+            }
         }
-
-        //변환 된 값 넣어줘야 함.
+        println(selectedlist)
+        return selectedlist.map{it -> mappingPlacetoPlaceDocument(it)} //변환 된 값 넣어줘야 함.
     }
 
-    private fun calculateDistance(x: Double?, y : Double?, place : Place) : Double? {
-        val dataX : Double? = place.x
-        val dataY : Double? = place.y
+    private fun calculateDistance(x: Double, y : Double, place :Place) : Boolean {
+        val theta : Double = place.x!! - x
+        var distance : Double = sin(toRadians(place.y!!))*sin(toRadians(y)) + cos(toRadians((place.y!!)))*cos(toRadians((y)))*cos(toRadians(theta))
 
-        val gottenX : Double? = x
-        val
+        distance = acos(distance)
+        distance = toDegrees(distance)
+        distance = distance*60*(1.1515)*(0.1609344) //단위 : 킬로미터(km) -> 원래는 1.609344를 곱해줘야함.
+
+        if (distance < 1000) {return true}  //1km이내인 정보만 출력해줌.
+        return false
+    }
+
+    /*
+    private fun calculateDistance(x: Double, y : Double, place :Place) : Boolean {
+        val dLat = Math.toRadians(place.y!! - y)
+        val dLng = Math.toRadians(place.x!! - x)
+        val a = sin(dLat / 2).pow(2.0) + sin(dLng / 2).pow(2.0) * cos(Math.toRadians(place.y!!)) * cos(Math.toRadians(y))
+        val c = 2 * asin(sqrt(a))
+        println("distance " + (R * c).toInt())
+        //단위 : m
+        if ((R * c).toInt() < 1000) {return true}  //1km이내인 정보만 출력해줌.
+        return false
+    }
+
+    fun getLocationItems(query: String, userLng : Double, userLat: Double) : List<PlaceDocument>{
+        val places: List<Place> =  placeRepository.findByCategorygroupnameAndXAndY(query, userLng, userLat) //getAll로 바꾸기.
+        return places.map { it ->  mappingPlacetoPlaceDocument(it) }    //이때 타입을 바꿔주면 안될듯 (return값 "엔티티" )
     }
     */
 
+    /*
+    private fun mappingPlaceDocumenttoPlace(placeDocument: PlaceDocument) : PlaceWestern {
+        val place : PlaceWestern = PlaceWestern()
+        place.id = placeDocument.id
+        place.addressname = placeDocument.address_name
+        place.categorygroupcode = placeDocument.category_group_code
+        place.categorygroupname = placeDocument.category_group_name
+        place.phone = placeDocument.phone
+        place.placename = placeDocument.place_name
+        place.placeurl = placeDocument.place_url
+        place.roadaddressname = placeDocument.road_address_name
+        place.x =placeDocument.x
+        place.y= placeDocument.y
+        return(place)
+    }
+     */
 
     private fun mappingPlaceDocumenttoPlace(placeDocument: PlaceDocument) : Place {
         val place : Place = Place()

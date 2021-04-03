@@ -6,5 +6,7 @@ interface PlaceJapanRepository {
 
     fun save(place : PlaceJapan?)
 
+    fun findAll() : List<PlaceJapan>
+
     fun findByCategorygroupnameAndXAndY(query: String, userLng : Double, userLat: Double) : List<PlaceJapan>
 }

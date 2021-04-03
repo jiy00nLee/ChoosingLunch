@@ -2,7 +2,6 @@ package com.example.toyproject_server.PlaceDatabase
 
 
 interface PlaceRepository {
-    //fun saveAll(places : List<Place>?) : List<Place>?//저장만 하면 되지 않나.\
 
     fun save(place : Place?)  //꼭 반환 X
     //fun saveAll (places : ArrayList<Place>?)  // 구현 왜 안되는지 모르겠다.
@@ -11,6 +10,7 @@ interface PlaceRepository {
 
     fun findAll() : List<Place>
 
+    //findByplacename "Containing" 기능 쓰면 해당 문자 포한하는 데이터 출력가능.
     fun findByplacename(placeName: String): Place?
-    //fun findAll() : List<Place>
+
 }

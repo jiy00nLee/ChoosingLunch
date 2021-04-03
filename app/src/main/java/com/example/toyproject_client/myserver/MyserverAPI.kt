@@ -13,7 +13,7 @@ import retrofit2.http.Query
 interface Myserver {
 
     companion object {
-        private const val BASE_URL = "http:/172.20.10.3:8080"   //내 서버 링크와 연결.
+        private const val BASE_URL = "http:/192.168.43.234:8080"   //내 서버 링크와 연결.
 
         fun create(): Myserver {
 
@@ -40,21 +40,8 @@ interface Myserver {
     fun getSearchLocationFromMyserverDatabase(
         @Query("query") keyword: String?, //[필수 구현] 검색을 원하는  (필수 != null, 입력은 받아야 하지만 입력값이 null이어도 된다 이말.)
         @Query("x") longitude: Double,  //[필수 구현] 입력받음(정보 o)
-        @Query("y") latitude: Double,   //[필수 구현] 입력받음(정보 o)
-        @Query("radius") radius: Int = 1000, //[필수 구현] 입력은 없지만 알아서 넣어줌(정보 o)
-        @Query("page") page_size : Int = 45,
-        @Query("size") size: Int = 15, //알아서 넣어줌.
-        @Query("category_group_code") category_group_code: String = "FD6"
+        @Query("y") latitude: Double
 
-        /*
-        //가져올때 덧붙일 조건!(중요)
-        @Query("query") keyword: String?, //[필수 구현] 검색을 원하는  (필수 != null, 입력은 받아야 하지만 입력값이 null이어도 된다 이말.)
-        @Query("x") longitude: Double,  //[필수 구현] 입력받음(정보 o)
-        @Query("y") latitude: Double,   //[필수 구현] 입력받음(정보 o)
-        @Query("radius") radius: Int = 10000, //[필수 구현] 입력은 없지만 알아서 넣어줌(정보 o)
-        @Query("page") page_size : Int = 45,
-        @Query("size") size: Int = 15, //알아서 넣어줌.
-        @Query("category_group_code") category_group_code: String = "FD6" , //알아서 넣어줌. */
     ): Call<List<PlaceDocument>>
 
 
