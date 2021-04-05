@@ -8,7 +8,7 @@ import androidx.room.Query
 
 @Dao //DTO
 interface UserDataDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE) //데이터가 들어오면 바꿔끼운다.
+    @Insert(onConflict = OnConflictStrategy.REPLACE)                    //데이터가 들어오면 바꿔끼운다.
     fun insertUserLocationData(userdata : UserDataEntity)              //해당 사용자의 위치 정보를 저장한다.
 
     @Query("SELECT * from userdataTable LIMIT 1 ")

@@ -112,14 +112,15 @@ class MyserverController {
 
     @GetMapping ("/myServerDatabase")
     fun getDB(@RequestParam("query") query: String,
-              @RequestParam("x") userLng: Double, @RequestParam("y") userLat: Double) : List<PlaceDocument> {
+              @RequestParam("x") userLng: Double, @RequestParam("y") userLat: Double,
+            @RequestParam("storeAddress") userAddress : String) : List<PlaceDocument> {
 
-        val foundquery : QueryData? = queryService.findQuery(query, userLng, userLat) //query 찾은 적 있었는지 여부 찾기.
+        val foundquery : QueryData? = queryService.findQuery(query, userLng, userLat,userAddress) //query 찾은 적 있었는지 여부 찾기.
 
         if (foundquery == null ){//이전에 찾은적이 없는 정보인 경우.
             println("Its not in db!")
             getFromKakao(query, userLng, userLat)
-            queryService.saveQuery(query, userLng, userLat)
+            queryService.saveQuery(query, userLng, userLat, userAddress)
         }
 
         lateinit var resultStorelistdata : List<PlaceDocument>

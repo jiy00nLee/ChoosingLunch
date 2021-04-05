@@ -14,20 +14,21 @@ class QueryService {
         this.queryRepository = queryRepository
     }
 
-    fun findQuery(query: String, userLng : Double, userLat: Double) : QueryData? {
-        return queryRepository.findByQueryAndLngAndLat(query, userLng, userLat)
+    fun findQuery(query: String, userLng : Double, userLat: Double, userAddress:String) : QueryData? {
+        return queryRepository.findByQueryAndLngAndLatAndUseraddress(query, userLng, userLat, userAddress)
     }
-    fun saveQuery(query: String, userLng : Double, userLat: Double){
-        val transed_queryData : QueryData = mappingDatastoQueryData(query, userLng, userLat)
+    fun saveQuery(query: String, userLng : Double, userLat: Double, userAddress:String){
+        val transed_queryData : QueryData = mappingDatastoQueryData(query, userLng, userLat,userAddress)
         queryRepository.save(transed_queryData)
     }
 
-    private fun mappingDatastoQueryData(query: String, userLng : Double, userLat: Double) : QueryData{
+    private fun mappingDatastoQueryData(query: String, userLng : Double, userLat: Double, userAddress:String) : QueryData{
         val queryData : QueryData = QueryData()
         //이 경우,  id는 autogenerate이므로 지정해줄 필요 X.
         queryData.query = query
         queryData.lng = userLng
         queryData.lat = userLat
+        queryData.useraddress = userAddress
         return queryData
     }
 

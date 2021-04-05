@@ -18,6 +18,7 @@ class HomeSecondFragment : Fragment() {
 
     private var userLat: Double = 0.0
     private var userLng: Double = 0.0
+    private var useraddress : String = ""
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_secondhome, container, false)
@@ -28,9 +29,10 @@ class HomeSecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getUserLocationData().observe(viewLifecycleOwner) {
-            userLat = it?.latitude!!
-            userLng = it?.longtitude!!
-            viewModel.getStoreList("한식", userLng, userLat)
+            userLat = it.latitude
+            userLng = it.longtitude
+            useraddress = it.address
+            viewModel.getStoreList("한식", userLng, userLat, useraddress)
             showRecyclerView()
         }
     }

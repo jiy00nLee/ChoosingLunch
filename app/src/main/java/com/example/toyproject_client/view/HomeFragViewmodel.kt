@@ -33,9 +33,9 @@ class HomeFragViewmodel (application: Application) : AndroidViewModel(applicatio
     }
 
 
-    fun getStoreList(storecategory : String, userLat: Double, userLng: Double) {
+    fun getStoreList(storecategory : String, userLat: Double, userLng: Double, storeaddres: String ) {
         val myserverAPI = Myserver.create() //서버 생성
-        val call =  myserverAPI.getSearchLocationFromMyserverDatabase(storecategory, userLat, userLng)
+        val call =  myserverAPI.getSearchLocationFromMyserverDatabase(storecategory, userLat, userLng, storeaddres)
 
         call.enqueue(object : Callback<List<PlaceDocument>> {
             //통신 성공

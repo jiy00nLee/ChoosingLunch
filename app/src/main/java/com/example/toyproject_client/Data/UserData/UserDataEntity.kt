@@ -19,7 +19,7 @@ data class UserDataEntity (
     @ColumnInfo(name = "userLatitude")
     val latitude : Double,
 
-    @PrimaryKey(autoGenerate = true) //후에 id(String) 추가해줘야함. -> 이름은 primary X.
+    @PrimaryKey(autoGenerate = true) //후에 id(String) 추가해줘야함. -> 이름은 primary X. -> 로그인구현 안해서 로그인아이디가 없어서 일단 엔티티가 계속 생성됨!!!!!!!!
     @ColumnInfo(name="id")
     val id : Int  = 0
 

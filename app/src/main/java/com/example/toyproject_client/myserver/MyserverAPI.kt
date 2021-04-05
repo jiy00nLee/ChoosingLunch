@@ -40,7 +40,8 @@ interface Myserver {
     fun getSearchLocationFromMyserverDatabase(
         @Query("query") keyword: String?, //[필수 구현] 검색을 원하는  (필수 != null, 입력은 받아야 하지만 입력값이 null이어도 된다 이말.)
         @Query("x") longitude: Double,  //[필수 구현] 입력받음(정보 o)
-        @Query("y") latitude: Double
+        @Query("y") latitude: Double,
+        @Query("storeAddress")  storeaddres: String
 
     ): Call<List<PlaceDocument>>
 

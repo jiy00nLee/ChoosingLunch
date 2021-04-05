@@ -13,4 +13,5 @@ class QueryData {
     lateinit var query : String
     var lng : Double? = null
     var lat : Double? = null
+    lateinit var useraddress : String
 }
