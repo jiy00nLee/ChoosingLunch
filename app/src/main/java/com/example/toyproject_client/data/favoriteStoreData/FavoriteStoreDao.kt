@@ -1,4 +1,4 @@
-package com.example.toyproject_client.Data.favoriteStoreData
+package com.example.toyproject_client.data.favoriteStoreData
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
@@ -12,5 +12,5 @@ interface FavoriteStoreDao {
     fun insertFavoriteStoreInfo(favoriteStoreEntity: FavoriteStoreEntity)              //해당 사용자의 위치 정보를 저장한다.
 
     @Query("SELECT * from favoriteStoreTable")
-    fun getAllFavoriteStores() : LiveData<List<FavoriteStoreEntity>> //즐겨찾기 등록된 가게의 정보를 모두 가져온다.
+    fun getAllFavoriteStores() : LiveData<List<FavoriteStoreEntity>?> //즐겨찾기 등록된 가게의 정보를 모두 가져온다.
 }

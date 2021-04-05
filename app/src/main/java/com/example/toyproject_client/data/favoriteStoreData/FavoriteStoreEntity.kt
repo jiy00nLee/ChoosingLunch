@@ -1,4 +1,4 @@
-package com.example.toyproject_client.Data.favoriteStoreData
+package com.example.toyproject_client.data.favoriteStoreData
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
