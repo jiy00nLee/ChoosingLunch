@@ -3,7 +3,7 @@ package com.example.toyproject_client
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.toyproject_client.Data.StoreMenuItem
+import com.example.toyproject_client.data.StoreMenuItem
 import com.example.toyproject_client.databinding.StoreItemBinding
 
 

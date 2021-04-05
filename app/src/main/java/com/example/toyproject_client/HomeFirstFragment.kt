@@ -9,15 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.toyproject_client.myserver.PlaceDocument
-import com.example.toyproject_client.view.HomeFragViewmodel
-import kotlinx.android.synthetic.main.fragment_fifthhome.*
-import kotlinx.android.synthetic.main.fragment_firsthome.*
+import com.example.toyproject_client.data.UserDataViewmodel
 import kotlinx.android.synthetic.main.fragment_firsthome.recyclerView
 
 
 class HomeFirstFragment : Fragment() {
 
-    private val viewModel: HomeFragViewmodel by viewModels()
+    private val viewModel: UserDataViewmodel by viewModels()
     private lateinit var adapterStore: Store_RecyclerViewAdapter
 
     private var userLat: Double = 0.0

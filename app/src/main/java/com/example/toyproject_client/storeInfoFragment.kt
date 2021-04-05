@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.toyproject_client.Data.StoreMenuItem
+import com.example.toyproject_client.data.FavoriteStoreViewmodel
+import com.example.toyproject_client.data.StoreMenuItem
 import com.example.toyproject_client.databinding.FragmentStoreinfoBinding
 import com.example.toyproject_client.myserver.PlaceDocument
-import com.example.toyproject_client.view.HomeFragViewmodel
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.fragment_storeinfo.recyclerView
 class storeInfoFragment : Fragment(), OnMapReadyCallback {
 
     //가져온 해당 가게 정보
-    private val viewModel: HomeFragViewmodel by viewModels()
+    private val viewModel: FavoriteStoreViewmodel by viewModels()
     private lateinit var binding : FragmentStoreinfoBinding
     var receivedItemdata : PlaceDocument? = null
 
@@ -55,6 +55,12 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
         receivedItemdata = arguments?.getParcelable("selectedStore")
         makeMapView()
         makeView()
+
+        like_btn.setOnClickListener {
+            //즐겨찾기 되었을 때 버튼 상태 변환 필요!!!!
+            viewModel.insertFavoriteStore(receivedItemdata!!) //NUll이 아닐경우 !!!!!!!!!!!!!!!!!!
+
+        }
 
     }
 
@@ -99,10 +105,6 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
         //해당 가게의 음식들을 가져와야 한다. (메뉴 표현)
         adapterStore = Menu_RecyclerViewAdapter(storeMenues)
         recyclerView.adapter = adapterStore
-
-        like.setOnClickListener {
-            //DB에 테이블 등록하기.
-        }
 
     }
 

@@ -12,7 +12,7 @@ class MyserverRepository {
 
     companion object{
         private var sInstance: MyserverRepository? = null
-        fun getInstance(database: AppDatabase): MyserverRepository {
+        fun getInstance(): MyserverRepository {
             return sInstance
                 ?: synchronized(this){
                     val instance = MyserverRepository()

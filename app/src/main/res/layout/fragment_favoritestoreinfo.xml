@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="주소"
+            android:text="즐겨찾기"
             android:textSize="15dp"
             android:textStyle="bold" />
         <View
@@ -28,23 +28,23 @@
             android:layout_weight="1"
             />
         <Button
-            android:id="@+id/location_btn"
+            android:id="@+id/selectstore_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:gravity="center"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:text="위치등록" />
+            android:text="선택" />
         <Button
-            android:id="@+id/favoritestore_btn"
+            android:id="@+id/deletestore_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="5dp"
             android:gravity="center"
             android:minWidth="0dp"
             android:minHeight="0dp"
-            android:text="즐겨찾기" />
+            android:text="삭제" />
     </LinearLayout>
     <LinearLayout
         android:id="@+id/ContentLayout"
@@ -55,20 +55,12 @@
         app:layout_constraintTop_toBottomOf="@id/TitleLayout"
         app:layout_constraintVertical_weight="15"
         tools:layout_editor_absoluteX="0dp">
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/menu_bottom_navigation"
-            android:id="@+id/main_bottom_navigation"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:background="@color/white"
-            android:layout_alignParentTop="true"/>
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/main_pager"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"  />
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/store_item"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

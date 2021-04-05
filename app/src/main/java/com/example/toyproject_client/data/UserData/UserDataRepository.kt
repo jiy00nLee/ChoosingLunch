@@ -1,5 +1,6 @@
 package com.example.toyproject_client.data.UserData
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.toyproject_client.data.AppDatabase
@@ -27,6 +28,7 @@ class UserDataRepository(appdatabase: AppDatabase){
         val latitude : Double = it.latitude
         return (UserDataEntity(username, address, longtitude, latitude))
     }
+
     private fun mappingUserDataEntityToUserDataItem(it : UserDataEntity) : UserLocationItemData {
         val username : String = it.username
         val address : String = it.address

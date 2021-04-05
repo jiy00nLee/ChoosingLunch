@@ -14,6 +14,10 @@
         <action
             android:id="@+id/action_homeFragment_to_storeInfoFragment"
             app:destination="@id/storeInfoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_favoriteStoreInfoFragment"
+            app:destination="@id/favoriteStoreInfoFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/insertLocationInfoFragment"
@@ -27,4 +31,12 @@
         android:id="@+id/storeInfoFragment"
         android:name="com.example.toyproject_client.storeInfoFragment"
         android:label="storeInfoFragment" />
+    <fragment
+        android:id="@+id/favoriteStoreInfoFragment"
+        android:name="com.example.toyproject_client.FavoriteStoreInfoFragment"
+        android:label="FavoriteStoreInfoFragment" >
+        <action
+            android:id="@+id/action_favoriteStoreInfoFragment_to_storeInfoFragment"
+            app:destination="@id/storeInfoFragment" />
+    </fragment>
 </navigation>

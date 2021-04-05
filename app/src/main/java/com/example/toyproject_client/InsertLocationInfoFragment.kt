@@ -7,6 +7,7 @@ import android.location.Geocoder
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,17 +16,15 @@ import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.toyproject_client.view.HomeFragViewmodel
+import com.example.toyproject_client.data.UserDataViewmodel
 import com.example.toyproject_client.data.UserData.UserLocationItemData
-import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.util.FusedLocationSource
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_insertlocationinfo.*
 import java.util.*
 
 class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
-    private val viewModel: HomeFragViewmodel by viewModels()
+    private val viewModel: UserDataViewmodel by viewModels()
 
     private var locationManager : LocationManager?= null //LocationManager
     private var connectionManager : ConnectivityManager?= null //WifiManager
@@ -64,6 +63,7 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
         viewModel.getUserLocationData().observe(viewLifecycleOwner){
             username = it.username
             userlocation = it.address
+            address = userlocation
             userName.text = username
             userLocation.text = userlocation
         }
@@ -77,8 +77,10 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
         //사용자 위치 정보 서버에 입력하기.
         inputlocation_btn.setOnClickListener {
             //find() -> 서버에 현재 사용자 위치입력 후 관련된 쿼리 생성해서 데이터 뽑아서 디비에 저장해야함. (해야할 것!)
-            viewModel.insertUserLocationData(UserLocationItemData(username,  address.toString(), nowLat, nowLng))
-            findNavController().navigate(R.id.action_insertLocationInfoFragment_to_homeFragment)
+            if (address != null){
+                viewModel.insertUserLocationData(UserLocationItemData(username,  address.toString(), nowLat, nowLng))  //로그인 구현시에 바꾸어 주어야 함.!!!!!
+                findNavController().navigate(R.id.action_insertLocationInfoFragment_to_homeFragment)
+            }
         }
     }
 

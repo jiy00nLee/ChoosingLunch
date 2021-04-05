@@ -10,12 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.example.toyproject_client.view.HomeFragViewmodel
+import com.example.toyproject_client.data.UserDataViewmodel
+
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.userlocation
 
 class HomeFragment : Fragment() {
-    private val viewModel: HomeFragViewmodel by viewModels()
+    private val viewModel: UserDataViewmodel by viewModels()
     private lateinit var viewPagerAdapter: ViewPagerAdapter
 
     //사용자 정보 변수들.
@@ -36,13 +37,10 @@ class HomeFragment : Fragment() {
 
         //(가입시) 이미 정보가 있다는 가정하이다.
         viewModel.getUserLocationData().observe(viewLifecycleOwner) {
-            if (it?.username != null){
-                Log.d("dfdf", "${it}")
-                useraddress = it.address!!
-                userLat = it.latitude!!
-                userLng = it.longtitude!!
+                useraddress = it.address
+                userLat = it.latitude
+                userLng = it.longtitude
                 userlocation.text = useraddress //주소같은 경우 xml로 표현해주기.
-            }
         }
 
         return rootView
@@ -53,11 +51,13 @@ class HomeFragment : Fragment() {
 
         initViewPager()
 
-        //사용자 위치등록하기.
         location_btn.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_insertLocationInfoFragment)
         }
 
+        favoritestore_btn.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_favoriteStoreInfoFragment)
+        }
     }
 
 
