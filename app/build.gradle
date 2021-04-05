@@ -22,6 +22,12 @@ android {
         versionCode 1
         versionName "1.0"
 
+        //Room increment (default = false -> true)
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ "objectbox.incremental" : "true" ]
+            }
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.toyproject_client.data.storeMenu.StoreMenuItem
+import com.example.toyproject_client.Data.StoreMenuItem
 import com.example.toyproject_client.databinding.FragmentStoreinfoBinding
 import com.example.toyproject_client.myserver.PlaceDocument
 import com.example.toyproject_client.view.HomeFragViewmodel

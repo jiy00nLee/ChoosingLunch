@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.toyproject_client.Data.favoriteStoreData.FavoriteStoreRepository
 import com.example.toyproject_client.data.AppDatabase
 import com.example.toyproject_client.data.UserData.UserDataRepository
 import com.example.toyproject_client.data.UserData.UserLocationItemData
@@ -20,34 +21,24 @@ import retrofit2.Response
 
 class HomeFragViewmodel (application: Application) : AndroidViewModel(application) {
 
-    private val userdatarepository = UserDataRepository(AppDatabase.getDatabase(application, viewModelScope))
-    var livedata_resultplaces : MutableLiveData<List<PlaceDocument>?> = MutableLiveData()
+    private val userdataRepository = UserDataRepository(AppDatabase.getDatabase(application, viewModelScope))
+    private val myserverRepository = FavoriteStoreRepository()
 
 
     fun insertUserLocationData(it : UserLocationItemData) = viewModelScope.launch(Dispatchers.IO)  {
-        userdatarepository.insertUserLocationData(it)
+        userdataRepository.insertUserLocationData(it)
     }
 
     fun getUserLocationData() : LiveData<UserLocationItemData> {
-        return userdatarepository.getUserLocationData()
+        return userdataRepository.getUserLocationData()
     }
 
 
-    fun getStoreList(storecategory : String, userLat: Double, userLng: Double, storeaddres: String ) {
-        val myserverAPI = Myserver.create() //서버 생성
-        val call =  myserverAPI.getSearchLocationFromMyserverDatabase(storecategory, userLat, userLng, storeaddres)
+    fun getStoreList(storecategory : String, userLat: Double, userLng: Double, storeaddres: String ) : MutableLiveData<List<PlaceDocument>?>  {
 
-        call.enqueue(object : Callback<List<PlaceDocument>> {
-            //통신 성공
-            override fun onResponse(call: Call<List<PlaceDocument>>, response: Response<List<PlaceDocument>>) {
-                livedata_resultplaces.value = response.body()
-                Log.e(TAG,"${livedata_resultplaces.value}")
-            }
-            //통신 실패
-            override fun onFailure(call: Call<List<PlaceDocument>>, t: Throwable) {
-                Log.e(TAG,"FAIL")
-            }
-        })
+        myserverRepository.getStoreList(storecategory, userLat, userLng, storeaddres)
+
+        return myserverRepository.livedata_resultplaces
 
         //val resultplaces = myserverAPI.getSearchLocationFromMyserver(storecategory, userLat, userLng).execute().body()
        // livedata_resultplaces.value = resultplaces

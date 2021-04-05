@@ -60,7 +60,6 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
     ): View? {
 
         val rootView = inflater.inflate(R.layout.fragment_insertlocationinfo, container, false)
-
         //(가입시) 이미 정보가 있다는 가정하이다.
         viewModel.getUserLocationData().observe(viewLifecycleOwner){
             username = it.username
@@ -68,7 +67,6 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
             userName.text = username
             userLocation.text = userlocation
         }
-
         return rootView
     }
 

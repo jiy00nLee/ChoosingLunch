@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.toyproject_client.data.AppDatabase
 
-class UserDataRepository(locationdatabase: AppDatabase){
+class UserDataRepository(appdatabase: AppDatabase){
 
-    private val userdataDao = locationdatabase.UserDataDao()
+    private val userdataDao = appdatabase.UserDataDao()
 
     companion object{
         private var sInstance: UserDataRepository? = null

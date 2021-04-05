@@ -3,10 +3,9 @@ package com.example.toyproject_client
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.toyproject_client.data.storeMenu.StoreMenuItem
-import com.example.toyproject_client.databinding.FragmentStoreinfoBinding
+import com.example.toyproject_client.Data.StoreMenuItem
 import com.example.toyproject_client.databinding.StoreItemBinding
-import com.example.toyproject_client.myserver.PlaceDocument
+
 
 class Menu_RecyclerViewAdapter(received_items : List<StoreMenuItem>) : RecyclerView.Adapter<Menu_RecyclerViewAdapter.SearchViewHolder>() {
 

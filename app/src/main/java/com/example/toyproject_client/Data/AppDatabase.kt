@@ -6,13 +6,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.toyproject_client.Data.favoriteStoreData.FavoriteStoreDao
+import com.example.toyproject_client.Data.favoriteStoreData.FavoriteStoreEntity
 import com.example.toyproject_client.data.UserData.UserDataDao
 import com.example.toyproject_client.data.UserData.UserDataEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
-@Database(entities = [UserDataEntity::class], version = 1, exportSchema = false)
+@Database(entities = [UserDataEntity::class, FavoriteStoreEntity::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun UserDataDao(): UserDataDao
     //abstract fun FavoriteStoreDao() : FavoriteStoreDao
@@ -54,9 +56,12 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
 
-        //이번 어플에서는 초기데이터가 없기 때문에 필요가 없다.
-        suspend fun UserDatabase(userdataDao: UserDataDao) {    //초기 데이터 넣어주기.(ex.서버)
-            //LocationDao.insert(LocationEntity("Lilly","여",1))
+
+        suspend fun UserDatabase(userdataDao: UserDataDao) {
+            //LocationDao.insert(LocationEntity("Lilly","여",1)) //초기 데이터 넣어주기.(ex.서버) -> 이번어플에서는 X.
+        }
+        suspend fun FavoriteStoreDatabase(favoritestoreDao : FavoriteStoreDao){
+
         }
     }
 

@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.toyproject_client.myserver.PlaceDocument
 import com.example.toyproject_client.view.HomeFragViewmodel
+import kotlinx.android.synthetic.main.fragment_fifthhome.*
 import kotlinx.android.synthetic.main.fragment_firsthome.*
+import kotlinx.android.synthetic.main.fragment_firsthome.recyclerView
 
 
 class HomeFirstFragment : Fragment() {
@@ -33,27 +36,24 @@ class HomeFirstFragment : Fragment() {
             userLat = it.latitude
             userLng = it.longtitude
             useraddress = it.address
-            viewModel.getStoreList("음식점", userLng, userLat, useraddress)
-            showRecyclerView()
+            viewModel.getStoreList("음식점", userLng, userLat, useraddress).observe(viewLifecycleOwner){resultStorelist ->
+                showRecyclerView(resultStorelist)
+            }
         }
     }
 
-    private fun showRecyclerView() {
-        viewModel.livedata_resultplaces.observe(viewLifecycleOwner){ resultplaces ->
+    private fun showRecyclerView(storelist: List<PlaceDocument>?) {
 
-            if (resultplaces!=null){
-                adapterStore = Store_RecyclerViewAdapter(resultplaces!!) { placeDocument ->
-                    Log.d("Checking!!", "${placeDocument}")
-                    val bundle = Bundle()
-                    bundle?.putParcelable("selectedStore", placeDocument)
-                    findNavController().navigate(
-                            R.id.action_homeFragment_to_storeInfoFragment,
-                            bundle
-                    )
-                }//.apply { rc_storeItems = resultplaces!! }
-                recyclerView.adapter = adapterStore
-            }
-        }
+        adapterStore = Store_RecyclerViewAdapter(storelist!!) { placeDocument ->
+            Log.d("Checking!!", "${placeDocument}")
+            val bundle = Bundle()
+            bundle?.putParcelable("selectedStore", placeDocument)
+            findNavController().navigate(
+                R.id.action_homeFragment_to_storeInfoFragment,
+                bundle
+            )
+        }//.apply { rc_storeItems = resultplaces!! }
+        recyclerView.adapter = adapterStore
     }
 
 
