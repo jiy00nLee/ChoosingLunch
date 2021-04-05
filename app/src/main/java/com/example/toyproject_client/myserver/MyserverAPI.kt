@@ -13,7 +13,7 @@ import retrofit2.http.Query
 interface Myserver {
 
     companion object {
-        private const val BASE_URL = "http:/172.21.168.81:8080"   //내 서버 링크와 연결.
+        private const val BASE_URL = "http:/192.168.110.79:8080"   //내 서버 링크와 연결.
 
         fun create(): Myserver {
 

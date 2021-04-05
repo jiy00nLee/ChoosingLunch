@@ -29,8 +29,8 @@ class HomeFirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getUserLocationData().observe(viewLifecycleOwner) {
-            userLat = it.latitude
-            userLng = it.longtitude
+            userLat = it?.latitude!!
+            userLng = it?.longtitude!!
             viewModel.getStoreList("음식점", userLng, userLat)
             showRecyclerView()
         }

@@ -20,6 +20,7 @@ import com.example.toyproject_client.data.UserData.UserLocationItemData
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.util.FusedLocationSource
+import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_insertlocationinfo.*
 import java.util.*
 
@@ -64,10 +65,8 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
         viewModel.getUserLocationData().observe(viewLifecycleOwner){
             username = it.username
             userlocation = it.address
-
             userName.text = username
             userLocation.text = userlocation
-
         }
 
         return rootView
@@ -80,6 +79,7 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
         //사용자 위치 정보 서버에 입력하기.
         inputlocation_btn.setOnClickListener {
             //find() -> 서버에 현재 사용자 위치입력 후 관련된 쿼리 생성해서 데이터 뽑아서 디비에 저장해야함. (해야할 것!)
+            viewModel.insertUserLocationData(UserLocationItemData(username,  address.toString(), nowLat, nowLng))
             findNavController().navigate(R.id.action_insertLocationInfoFragment_to_homeFragment)
         }
     }
@@ -170,7 +170,6 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
         val geoCoder = Geocoder(context, Locale.getDefault())
         addresslist =  geoCoder.getFromLocation(nowLat, nowLng, 1) //위도,경도 -> 주소로 변환
         address = addresslist!!.get(0).getAddressLine(0)
-        viewModel.insertUserLocationData(UserLocationItemData(username,  address.toString(), nowLat, nowLng))
         // Toast.makeText(context, "위치 :  "+ "${addresslist}", Toast.LENGTH_SHORT).show()
 
     }

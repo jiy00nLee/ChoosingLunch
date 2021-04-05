@@ -1,6 +1,7 @@
 package com.example.toyproject_client
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -35,10 +36,13 @@ class HomeFragment : Fragment() {
 
         //(가입시) 이미 정보가 있다는 가정하이다.
         viewModel.getUserLocationData().observe(viewLifecycleOwner) {
-            useraddress = it.address
-            userLat = it.latitude
-            userLng = it.longtitude
-            userlocation.text = useraddress //주소같은 경우 xml로 표현해주기.
+            if (it?.username != null){
+                Log.d("dfdf", "${it}")
+                useraddress = it.address!!
+                userLat = it.latitude!!
+                userLng = it.longtitude!!
+                userlocation.text = useraddress //주소같은 경우 xml로 표현해주기.
+            }
         }
 
         return rootView

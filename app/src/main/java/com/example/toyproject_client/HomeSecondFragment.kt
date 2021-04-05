@@ -28,8 +28,8 @@ class HomeSecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getUserLocationData().observe(viewLifecycleOwner) {
-            userLat = it.latitude
-            userLng = it.longtitude
+            userLat = it?.latitude!!
+            userLng = it?.longtitude!!
             viewModel.getStoreList("한식", userLng, userLat)
             showRecyclerView()
         }

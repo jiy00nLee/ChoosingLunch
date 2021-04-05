@@ -7,13 +7,8 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "userdataTable")
 data class UserDataEntity (
 
-    //후에 id 추가해줘야함. -> 이름은 primary X.
-    @PrimaryKey
-    @ColumnInfo(name="id")
-    val id : String,
-
-    @ColumnInfo
-    val addressname : String,
+    @ColumnInfo(name = "userName")
+    val username : String,
 
     @ColumnInfo(name="userAddress")
     val address : String,
@@ -23,5 +18,9 @@ data class UserDataEntity (
 
     @ColumnInfo(name = "userLatitude")
     val latitude : Double,
+
+    @PrimaryKey(autoGenerate = true) //후에 id(String) 추가해줘야함. -> 이름은 primary X.
+    @ColumnInfo(name="id")
+    val id : Int  = 0
 
 )
