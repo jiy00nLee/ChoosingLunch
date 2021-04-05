@@ -12,6 +12,7 @@ import com.example.toyproject_client.data.AppDatabase
 import com.example.toyproject_client.data.UserData.UserDataRepository
 import com.example.toyproject_client.data.UserData.UserLocationItemData
 import com.example.toyproject_client.myserver.Myserver
+import com.example.toyproject_client.myserver.MyserverRepository
 import com.example.toyproject_client.myserver.PlaceDocument
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ import retrofit2.Response
 class HomeFragViewmodel (application: Application) : AndroidViewModel(application) {
 
     private val userdataRepository = UserDataRepository(AppDatabase.getDatabase(application, viewModelScope))
-    private val myserverRepository = FavoriteStoreRepository()
+    private val myserverRepository = MyserverRepository()
 
 
     fun insertUserLocationData(it : UserLocationItemData) = viewModelScope.launch(Dispatchers.IO)  {
