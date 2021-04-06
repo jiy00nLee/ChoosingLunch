@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.toyproject_client.myserver.PlaceDocument
 import com.example.toyproject_client.data.UserDataViewmodel
 import kotlinx.android.synthetic.main.fragment_fifthhome.*
+import kotlinx.android.synthetic.main.fragment_fifthhome.recyclerView
+import kotlinx.android.synthetic.main.fragment_fourthhome.*
 
 class HomeFifthFragment : Fragment() {
 
@@ -41,16 +43,17 @@ class HomeFifthFragment : Fragment() {
 
     private fun showRecyclerView(storelist: List<PlaceDocument>?) {
 
-        adapterStore = Store_RecyclerViewAdapter(storelist!!) { placeDocument ->
-            Log.d("Checking!!", "${placeDocument}")
-            val bundle = Bundle()
-            bundle?.putParcelable("selectedStore", placeDocument)
-            findNavController().navigate(
-                R.id.action_homeFragment_to_storeInfoFragment,
-                bundle
-            )
-        }//.apply { rc_storeItems = resultplaces!! }
-        recyclerView.adapter = adapterStore
+        if (storelist != null) {
+            adapterStore = Store_RecyclerViewAdapter(storelist!!) { placeDocument ->
+                val bundle = Bundle()
+                bundle?.putParcelable("selectedStore", placeDocument)
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_storeInfoFragment,
+                    bundle
+                )
+            }//.apply { rc_storeItems = resultplaces!! }
+            recyclerView.adapter = adapterStore
+        }
     }
 
 

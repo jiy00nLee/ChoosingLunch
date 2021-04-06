@@ -34,6 +34,7 @@ class UserDataRepository(appdatabase: AppDatabase){
         val address : String = it.address
         val longtitude : Double = it.longtitude
         val latitude : Double = it.latitude
+
         return (UserLocationItemData(username, address, longtitude, latitude))
     }
 
@@ -47,7 +48,6 @@ class UserDataRepository(appdatabase: AppDatabase){
         }
         return userlocationitemdataLiveData
     }
-
 
 
 

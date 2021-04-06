@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
-interface SpringDataJpaPlaceRepository : JpaRepository<Place,String>, PlaceRepository{ //String은 'Place'의 id(pk).
+interface JpaPlaceRepository : JpaRepository<Place,String>, PlaceRepository{ //String은 'Place'의 id(pk).
     //커스텀할 DB function만
 
 /*

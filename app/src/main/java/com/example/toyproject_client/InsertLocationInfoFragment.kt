@@ -67,6 +67,7 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
             userName.text = username
             userLocation.text = userlocation
         }
+
         return rootView
     }
 

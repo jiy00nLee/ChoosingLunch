@@ -26,6 +26,10 @@ class FavoriteStoreRepository(appdatabase: AppDatabase){
         favoriteStoreDao.insertFavoriteStoreInfo( mappingPlaceDocumentToFavoriteStoreEntity(receivedStoredata) )
     }
 
+    fun deleteFavoriteStore(receivedStoredata: PlaceDocument){
+        favoriteStoreDao.deleteFavoriteStoreInfo(mappingPlaceDocumentToFavoriteStoreEntity(receivedStoredata))
+    }
+
     fun getAllFavoriteStores() : LiveData<List<PlaceDocument>?>{
         val userlocationitemdataLiveData = Transformations.map(favoriteStoreDao.getAllFavoriteStores()){ entitylist -> entitylist?.map{ entity ->
             mappingFavoriteStireEntityToPlaceDocument(entity)
@@ -33,6 +37,10 @@ class FavoriteStoreRepository(appdatabase: AppDatabase){
         }
         return userlocationitemdataLiveData
     }
+    fun checkFavoriteStore(storeID : String) : LiveData<String?>{
+        return favoriteStoreDao.checkFavoriteStore(storeID)
+    }
+
 
     private fun mappingFavoriteStireEntityToPlaceDocument(it : FavoriteStoreEntity) : PlaceDocument{
         val storeID : String = it.id
@@ -48,7 +56,7 @@ class FavoriteStoreRepository(appdatabase: AppDatabase){
         val y : Double? = it.y
 
         return PlaceDocument(storeID, addressName, categoryGroupCode,  categoryGroupName, categoryName, phone, placeName,
-            placeURL, roadAddressName, x, y)
+            placeURL, roadAddressName, x, y, true)  //이거 항상 True 맞나 확인 필요
     }
 
     private fun mappingPlaceDocumentToFavoriteStoreEntity(it : PlaceDocument) : FavoriteStoreEntity {

@@ -1,5 +1,7 @@
 package com.example.toyproject_client.myserver
 
+import com.example.toyproject_client.data.UserData.UserDataEntity
+import com.example.toyproject_client.data.UserData.UserLocationItemData
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -36,7 +38,7 @@ interface Myserver {
         }
     }
 
-    @GET("/myServerDatabase") // 내서버의 특정링크로부터 가져올 것.
+    @GET("/myServerPlaceDatabase") // 내서버의 특정링크로부터 가져올 것.
     fun getSearchLocationFromMyserverDatabase(
         @Query("query") keyword: String?, //[필수 구현] 검색을 원하는  (필수 != null, 입력은 받아야 하지만 입력값이 null이어도 된다 이말.)
         @Query("x") longitude: Double,  //[필수 구현] 입력받음(정보 o)
@@ -44,7 +46,6 @@ interface Myserver {
         @Query("storeAddress")  storeaddres: String
 
     ): Call<List<PlaceDocument>>
-
 
     /*
     @POST("/myServerDatabase")  //이거 체킹이 필요하다.

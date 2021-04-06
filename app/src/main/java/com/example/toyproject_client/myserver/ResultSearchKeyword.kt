@@ -39,5 +39,6 @@ data class PlaceDocument (
     val place_url: String = "",    //장소 상세페이지 URL
     val road_address_name: String = "",
     val x: Double? = null, // longitude
-    val y: Double? = null //  latitude
+    val y: Double? = null, //  latitude
+    val clickstate : Boolean = false
 ) : Parcelable

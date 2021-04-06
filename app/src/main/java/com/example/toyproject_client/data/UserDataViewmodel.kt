@@ -20,7 +20,6 @@ class UserDataViewmodel (application: Application) : AndroidViewModel(applicatio
 
 
     fun insertUserLocationData(it : UserLocationItemData) = viewModelScope.launch(Dispatchers.IO)  {
-        Log.d("btn", "뷰모델 안.")
         userdataRepository.insertUserLocationData(it)
     }
 

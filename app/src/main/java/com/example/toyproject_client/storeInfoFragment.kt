@@ -3,6 +3,7 @@ package com.example.toyproject_client
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,10 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
     private var locationSource : FusedLocationSource ? = null
     private var naverMap: NaverMap? = null
 
+    //버튼 바꿀 때 필요한 정보 정보
+    var clickstate : Boolean = false  //임의의 값
+    private lateinit var storeID : String
+
 
 
     override fun onCreateView(
@@ -53,17 +58,43 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         receivedItemdata = arguments?.getParcelable("selectedStore")
+        clickstate = receivedItemdata!!.clickstate
+
+        //(추가조건) 서버에서 오는 정보의 경우 엔티티에 있는 지 여부 비교를 통해 즐겨찾기 등록 여부 표현 필요.
+        storeID = receivedItemdata!!.id
+        viewModel.checkFavoriteStore(storeID).observe(viewLifecycleOwner){
+            if (it == storeID) { //저장되어 있는 가게의 경우
+                clickstate = true
+            }
+            changeButtonImage(clickstate)
+        }
+
         makeMapView()
         makeView()
 
         like_btn.setOnClickListener {
-            //즐겨찾기 되었을 때 버튼 상태 변환 필요!!!!
-            viewModel.insertFavoriteStore(receivedItemdata!!) //NUll이 아닐경우 !!!!!!!!!!!!!!!!!!
-
+            clickstate = (!clickstate)
+            Log.d("BTN", "${clickstate}")
+            changeButtonImage(clickstate)
+            controlFavoriteStore(clickstate)
         }
 
     }
+    fun changeButtonImage(clickstate : Boolean){
+        if (clickstate == true) like_btn.setImageResource(R.drawable.selectedlikebutton)
+        else like_btn.setImageResource(R.drawable.likebutton)
+    }
 
+    fun controlFavoriteStore(clickstate: Boolean){
+        if (clickstate == true) {
+            //Log.d("BTN", "가게를 등록하였습니다..")
+            viewModel.insertFavoriteStore(receivedItemdata!!)
+        }
+        else {
+            //Log.d("BTN", "가게를 삭제하였습니다..")
+            viewModel.deleteFavoriteStore(receivedItemdata!!)
+        }
+    }
 
 
     override fun onRequestPermissionsResult(
@@ -101,7 +132,6 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
 
     private fun makeView(){
         binding.storeItem = receivedItemdata
-
         //해당 가게의 음식들을 가져와야 한다. (메뉴 표현)
         adapterStore = Menu_RecyclerViewAdapter(storeMenues)
         recyclerView.adapter = adapterStore

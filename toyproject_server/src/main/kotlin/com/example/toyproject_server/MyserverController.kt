@@ -110,7 +110,7 @@ class MyserverController {
     }
 
 
-    @GetMapping ("/myServerDatabase")
+    @GetMapping ("/myServerPlaceDatabase")
     fun getDB(@RequestParam("query") query: String,
               @RequestParam("x") userLng: Double, @RequestParam("y") userLat: Double,
             @RequestParam("storeAddress") userAddress : String) : List<PlaceDocument> {
