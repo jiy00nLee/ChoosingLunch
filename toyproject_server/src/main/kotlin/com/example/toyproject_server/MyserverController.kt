@@ -1,5 +1,6 @@
 package com.example.toyproject_server
 
+import com.example.toyproject_server.MenuDatabase.MenuService
 import com.example.toyproject_server.PlaceChineseDataBase.PlaceChineseService
 import com.example.toyproject_server.PlaceDatabase.PlaceService
 import com.example.toyproject_server.PlaceJapanDataBase.PlaceJapanService
@@ -20,6 +21,8 @@ class MyserverController {
 
     @Autowired
     private lateinit var queryService : QueryService
+    @Autowired
+    private lateinit var menuService: MenuService
 
     @Autowired
     private lateinit var placeService : PlaceService
@@ -39,13 +42,23 @@ class MyserverController {
                      @RequestParam("x") userLng: Double, @RequestParam("y") userLat: Double){
 
         //여기서 DB폭 늘려야 함.
-        //카카오 서버로부터 데이터 찾아서 디비에 넣어주기.
-        val querylist : MutableList<String> = mutableListOf()
-        if (query == "한식") KoreaService(userLng, userLat)
-        else if (query == "일식") JapanService(userLng, userLat)
-        else if (query == "중식") ChineseService(userLng, userLat)
-        else if (query == "양식") WesternService(userLng, userLat)
-        else Service(userLng, userLat)
+        //카카오 서버로부터 데이터 찾아서 디비에 넣어주기. //DB에 가게별 음식들도 등록을 해주어야 한다.
+        if (query == "한식") {
+            KoreaService(userLng, userLat)  // 1) DB에 가게 등록
+           // 자동화 에바 (원래라면 API에서 주어야 함)    // 2) 가게마다 메뉴 등록
+        }
+        else if (query == "일식") {
+            JapanService(userLng, userLat)
+        }
+        else if (query == "중식") {
+            ChineseService(userLng, userLat)
+        }
+        else if (query == "양식") {
+            WesternService(userLng, userLat)
+        }
+        else {
+            Service(userLng, userLat)
+        }
 
     }
 
@@ -117,9 +130,9 @@ class MyserverController {
 
         val foundquery : QueryData? = queryService.findQuery(query, userLng, userLat,userAddress) //query 찾은 적 있었는지 여부 찾기.
 
-        if (foundquery == null ){//이전에 찾은적이 없는 정보인 경우.
+        if (foundquery == null ){//이전에 찾은적이 없는 정보인 경우.(등록해줌)
             println("Its not in db!")
-            getFromKakao(query, userLng, userLat)
+            getFromKakao(query, userLng, userLat) //DB에 가게별 음식들도 등록을 해주어야 한다.
             queryService.saveQuery(query, userLng, userLat, userAddress)
         }
 

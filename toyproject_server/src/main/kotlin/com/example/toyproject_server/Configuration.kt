@@ -1,5 +1,7 @@
 package com.example.toyproject_server
 
+import com.example.toyproject_server.MenuDatabase.MenuRepository
+import com.example.toyproject_server.MenuDatabase.MenuService
 import com.example.toyproject_server.PlaceChineseDataBase.PlaceChinese
 import com.example.toyproject_server.PlaceChineseDataBase.PlaceChineseRepository
 import com.example.toyproject_server.PlaceChineseDataBase.PlaceChineseService
@@ -27,6 +29,14 @@ class Configuration {
     @Bean
     fun queryService() :QueryService{
         return QueryService(queryRepository)
+    }
+
+    @Autowired
+    private lateinit var menuRepository : MenuRepository
+
+    @Bean
+    fun menuService() : MenuService{
+        return MenuService(menuRepository)
     }
 
 

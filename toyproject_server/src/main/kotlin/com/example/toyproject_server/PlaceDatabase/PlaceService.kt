@@ -35,7 +35,8 @@ class PlaceService {
             places = resultSearchedData?.documents
             transed_places = places?.map {it -> mappingPlaceDocumenttoPlace(it)}
 
-            transed_places?.forEach { it -> placeRepository.save(it) } //placeRepository.saveAll(transed_places5) //이거 왜 안되는지 모르겠다.
+            transed_places?.forEach { it ->
+                placeRepository.save(it) } //placeRepository.saveAll(transed_places5) //이거 왜 안되는지 모르겠다.
             page_num = page_num + 1
             if (meta?.is_end == true) break
         }
@@ -116,6 +117,7 @@ class PlaceService {
         place.roadaddressname = placeDocument.road_address_name
         place.x =placeDocument.x
         place.y= placeDocument.y
+        place.categoryname = "음식점"
         return(place)
     }
 
@@ -131,7 +133,7 @@ class PlaceService {
         placeDocument.road_address_name = place.roadaddressname
         placeDocument.x = place.x
         placeDocument.y = place.y
-        //placeDocument.distance = calculateDistance(place.x, place.y)
+        placeDocument.category_name = place.categoryname
         return(placeDocument)
     }
 

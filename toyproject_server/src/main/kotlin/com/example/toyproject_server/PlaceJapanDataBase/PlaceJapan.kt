@@ -16,6 +16,6 @@ class PlaceJapan {
     lateinit var roadaddressname: String
     var x: Double? = null  // longitude
     var y: Double? = null  //  latitude
-
+    lateinit var categoryname : String  //임의로 만들어준 값
 
 }

@@ -84,6 +84,7 @@ class PlaceChineseService {
         place.roadaddressname = placeDocument.road_address_name
         place.x =placeDocument.x
         place.y= placeDocument.y
+        place.categoryname = "중식"
         return(place)
     }
 
@@ -99,6 +100,7 @@ class PlaceChineseService {
         placeDocument.road_address_name = place.roadaddressname
         placeDocument.x = place.x
         placeDocument.y = place.y
+        placeDocument.category_name = place.categoryname
         return(placeDocument)
     }
 

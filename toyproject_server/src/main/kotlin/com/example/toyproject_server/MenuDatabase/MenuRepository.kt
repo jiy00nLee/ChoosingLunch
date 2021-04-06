@@ -5,6 +5,8 @@ interface MenuRepository {
 
     fun findByStoreid(storeid : String)
 
+    //fun findAllBy() : List<String>
+
     //fun findAll() : List<Menu>
 
 }
