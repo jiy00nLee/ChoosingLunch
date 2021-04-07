@@ -1,5 +1,7 @@
 package com.example.toyproject_client.myserver
 
+import android.view.MenuItem
+import com.example.toyproject_client.data.StoreMenuItem
 import com.example.toyproject_client.data.UserData.UserDataEntity
 import com.example.toyproject_client.data.UserData.UserLocationItemData
 import okhttp3.Interceptor
@@ -43,9 +45,13 @@ interface Myserver {
         @Query("query") keyword: String?, //[필수 구현] 검색을 원하는  (필수 != null, 입력은 받아야 하지만 입력값이 null이어도 된다 이말.)
         @Query("x") longitude: Double,  //[필수 구현] 입력받음(정보 o)
         @Query("y") latitude: Double,
-        @Query("storeAddress")  storeaddres: String
-
+        @Query("userAddress")  useraddress: String
     ): Call<List<PlaceDocument>>
+
+    @GET("/myServerMenuDatabase")
+    fun getSearchStoreMenuFromMyserverDatabase(
+        @Query("storeID") storeid : String
+    ) : Call<List<StoreMenuItem>>
 
     /*
     @POST("/myServerDatabase")  //이거 체킹이 필요하다.

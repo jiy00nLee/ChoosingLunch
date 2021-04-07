@@ -1,19 +1,21 @@
 package com.example.toyproject_client
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toyproject_client.databinding.StoreItemBinding
 import com.example.toyproject_client.myserver.PlaceDocument
+import kotlinx.android.synthetic.main.store_menu_item.view.*
 
 class Store_RecyclerViewAdapter(var received_items : List<PlaceDocument>, var itemClick : (PlaceDocument) ->Unit) : RecyclerView.Adapter<Store_RecyclerViewAdapter.SearchViewHolder>() {
 
     private lateinit var binding : StoreItemBinding
-    var rc_storeItems : List<PlaceDocument> = received_items
+
 
 
     override fun getItemCount(): Int {
-        return rc_storeItems.size
+        return received_items.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
@@ -22,7 +24,7 @@ class Store_RecyclerViewAdapter(var received_items : List<PlaceDocument>, var it
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(rc_storeItems[position])    //리스트에서 하나를 뽑아서 (커스텀)뷰홀더에 전달해줌.
+        holder.bind(received_items[position])    //리스트에서 하나를 뽑아서 (커스텀)뷰홀더에 전달해줌.
     }
 
 

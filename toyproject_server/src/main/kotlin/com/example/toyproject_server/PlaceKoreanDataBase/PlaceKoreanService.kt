@@ -20,26 +20,29 @@ class PlaceKoreanService {
         this.placeRepository = placeRepository
     }
 
-    fun saveAll(query: String?, userLng : Double, userLat: Double)  {
+    fun saveAll(query: String?, userLng : Double, userLat: Double) : MutableList<String>? {
         var page_num : Int = 1
         val kakaoapi = KaKaoAPI.create()
         var resultSearchedData : ResultSearchKeyword?
         var meta : PlaceMeta?
         var places : List<PlaceDocument>?
         var transed_places : List<PlaceKorean>?
+        var store_ids : MutableList<String> = mutableListOf()
 
 
         while (true){
-            resultSearchedData = kakaoapi.getSearchLocationFromKakaoServer(query, userLat, userLng, page_num)?.execute()?.body()
+            resultSearchedData = kakaoapi.getSearchLocationFromKakaoServer(query, userLat, userLng, page_num).execute()?.body()
             meta = resultSearchedData?.meta
             places = resultSearchedData?.documents
             transed_places = places?.map {it -> mappingPlaceDocumenttoPlace(it)}
 
-            transed_places?.forEach { it -> placeRepository.save(it) } //placeRepository.saveAll(transed_places5) //이거 왜 안되는지 모르겠다.
+            transed_places?.forEach { it ->
+                store_ids.add(it.id)
+                placeRepository.save(it) } //placeRepository.saveAll(transed_places5) //이거 왜 안되는지 모르겠다.
             page_num = page_num + 1
             if (meta?.is_end == true) break
         }
-
+        return store_ids
     }
 
     fun getAll(query: String, userLng : Double, userLat: Double) : List<PlaceDocument>{
@@ -53,7 +56,6 @@ class PlaceKoreanService {
                 selectedlist.add(place)
             }
         }
-        println(selectedlist)
         return selectedlist.map{it -> mappingPlacetoPlaceDocument(it)} //변환 된 값 넣어줘야 함.
     }
 

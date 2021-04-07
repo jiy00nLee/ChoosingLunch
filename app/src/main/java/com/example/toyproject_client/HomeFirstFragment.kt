@@ -35,11 +35,14 @@ class HomeFirstFragment : Fragment() {
             userLat = it.latitude
             userLng = it.longtitude
             useraddress = it.address
+
             viewModel.getStoreList("음식점", userLng, userLat, useraddress).observe(viewLifecycleOwner){resultStorelist ->
                 showRecyclerView(resultStorelist)
             }
         }
     }
+
+
 
     private fun showRecyclerView(storelist: List<PlaceDocument>?) {
 

@@ -90,24 +90,14 @@
                     android:textStyle="bold"
                     android:layout_marginBottom="10dp"
                     />
-                <ScrollView
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp" >
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:scrollbars="vertical"
-                            tools:listitem="@layout/store_menu_item"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
-                        </androidx.recyclerview.widget.RecyclerView>
-                    </LinearLayout>
-                </ScrollView>
+                    android:scrollbars="vertical"
+                    tools:listitem="@layout/store_menu_item"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+                </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

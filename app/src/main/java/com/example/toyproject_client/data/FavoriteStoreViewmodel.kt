@@ -14,9 +14,10 @@ class FavoriteStoreViewmodel (application: Application) : AndroidViewModel(appli
 
     private val favoriteStoreRepository = FavoriteStoreRepository(AppDatabase.getDatabase(application, viewModelScope))
 
+    /*
     companion object{
         var checkingStoreName : String? = " "   //이렇게 했을때 코루틴값이 반영 도나?!!!!!!!
-    }
+    }*/
 
     fun insertFavoriteStore(receivedStoredata : PlaceDocument)  = viewModelScope.launch(Dispatchers.IO)  {
         favoriteStoreRepository.insertFavoriteStore(receivedStoredata)

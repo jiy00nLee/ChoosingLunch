@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 class UserDataViewmodel (application: Application) : AndroidViewModel(application) {
 
     private val userdataRepository = UserDataRepository(AppDatabase.getDatabase(application, viewModelScope))
-    private val myserverRepository = MyserverRepository()
+    private val myserverRepository = MyserverRepository.getInstance()
 
 
     fun insertUserLocationData(it : UserLocationItemData) = viewModelScope.launch(Dispatchers.IO)  {

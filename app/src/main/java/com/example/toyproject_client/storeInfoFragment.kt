@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.toyproject_client.data.FavoriteStoreViewmodel
+import com.example.toyproject_client.data.StoreInfoViewmodel
 import com.example.toyproject_client.data.StoreMenuItem
 import com.example.toyproject_client.databinding.FragmentStoreinfoBinding
 import com.example.toyproject_client.myserver.PlaceDocument
@@ -24,9 +25,12 @@ import kotlinx.android.synthetic.main.fragment_storeinfo.recyclerView
 class storeInfoFragment : Fragment(), OnMapReadyCallback {
 
     //가져온 해당 가게 정보
-    private val viewModel: FavoriteStoreViewmodel by viewModels()
+    private val storeviewModel: FavoriteStoreViewmodel by viewModels()
     private lateinit var binding : FragmentStoreinfoBinding
     var receivedItemdata : PlaceDocument? = null
+
+    //가져온 해당 가게의 메뉴 정보
+    private val menuviewmodel : StoreInfoViewmodel by viewModels()
 
     // 리사이클러뷰 정보
     private lateinit var adapterStore: Menu_RecyclerViewAdapter
@@ -52,7 +56,7 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         binding = DataBindingUtil.inflate(layoutInflater, R.layout.fragment_storeinfo, container, false)
         val rootView = binding.root
-        return rootView
+        return  rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,15 +66,15 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
 
         //(추가조건) 서버에서 오는 정보의 경우 엔티티에 있는 지 여부 비교를 통해 즐겨찾기 등록 여부 표현 필요.
         storeID = receivedItemdata!!.id
-        viewModel.checkFavoriteStore(storeID).observe(viewLifecycleOwner){
-            if (it == storeID) { //저장되어 있는 가게의 경우
+        storeviewModel.checkFavoriteStore(storeID).observe(viewLifecycleOwner){ receivedStoreId ->
+            if (receivedStoreId == storeID) { //저장되어 있는 가게의 경우
                 clickstate = true
             }
             changeButtonImage(clickstate)
         }
 
         makeMapView()
-        makeView()
+        makeView(storeID)
 
         like_btn.setOnClickListener {
             clickstate = (!clickstate)
@@ -88,11 +92,11 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
     fun controlFavoriteStore(clickstate: Boolean){
         if (clickstate == true) {
             //Log.d("BTN", "가게를 등록하였습니다..")
-            viewModel.insertFavoriteStore(receivedItemdata!!)
+            storeviewModel.insertFavoriteStore(receivedItemdata!!)
         }
         else {
             //Log.d("BTN", "가게를 삭제하였습니다..")
-            viewModel.deleteFavoriteStore(receivedItemdata!!)
+            storeviewModel.deleteFavoriteStore(receivedItemdata!!)
         }
     }
 
@@ -130,12 +134,16 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
         locationSource = FusedLocationSource(this, InsertLocationInfoFragment.LOCATION_PERMISSION_REQUEST_CODE)
     }
 
-    private fun makeView(){
-        binding.storeItem = receivedItemdata
-        //해당 가게의 음식들을 가져와야 한다. (메뉴 표현)
-        adapterStore = Menu_RecyclerViewAdapter(storeMenues)
-        recyclerView.adapter = adapterStore
+    private fun makeView(storeID : String){
 
+        binding.storeItem = receivedItemdata
+
+        //해당 가게의 음식들을 가져와야 한다. (메뉴 표현)
+        menuviewmodel.getStoreMenuList(storeID).observe(viewLifecycleOwner){ storeMenuItemList ->
+            adapterStore = Menu_RecyclerViewAdapter(storeMenuItemList!!)
+            recyclerView.adapter = adapterStore
+
+        }
     }
 
 

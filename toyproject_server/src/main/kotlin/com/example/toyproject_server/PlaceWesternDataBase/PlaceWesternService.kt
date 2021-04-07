@@ -23,13 +23,14 @@ class PlaceWesternService {
     }
 
 
-    fun saveAll(query: String?, userLng : Double, userLat: Double)  {
+    fun saveAll(query: String?, userLng : Double, userLat: Double) : MutableList<String>? {
         var page_num : Int = 1
         val kakaoapi = KaKaoAPI.create()
         var resultSearchedData : ResultSearchKeyword?
         var meta : PlaceMeta?
         var places : List<PlaceDocument>?
         var transed_places : List<PlaceWestern>?
+        var store_ids : MutableList<String> = mutableListOf()
 
 
         while (true){
@@ -38,11 +39,13 @@ class PlaceWesternService {
             places = resultSearchedData?.documents
             transed_places = places?.map {it -> mappingPlaceDocumenttoPlace(it)}
 
-            transed_places?.forEach { it -> placeRepository.save(it) } //placeRepository.saveAll(transed_places5) //이거 왜 안되는지 모르겠다.
+            transed_places?.forEach { it ->
+                store_ids.add(it.id)
+                placeRepository.save(it) } //placeRepository.saveAll(transed_places5) //이거 왜 안되는지 모르겠다.
             page_num = page_num + 1
             if (meta?.is_end == true) break
         }
-
+        return store_ids
     }
 
     fun getAll(query: String, userLng : Double, userLat: Double) : List<PlaceDocument>{

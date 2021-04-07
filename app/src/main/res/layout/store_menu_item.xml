@@ -3,11 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" >
-    <data>
-        <variable
-            name="StoreItems"
-            type="com.example.toyproject_client.myserver.PlaceDocument" />
-    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -38,15 +33,15 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="top"
                         android:layout_marginBottom="8dp"
-                        android:text="@{StoreItems.place_name}"
+                        android:text="메뉴이름"
                         android:textSize="18dp"
                         android:textStyle="bold" />
                     <TextView
                         android:id="@+id/menuPrice"
-                        android:layout_width="12dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
-                        android:text="@{StoreItems.category_name}"
+                        android:text="메뉴가격"
                         android:textSize="12dp" />
                 </LinearLayout>
                 <View
