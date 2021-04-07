@@ -2,11 +2,7 @@ package com.example.toyproject_server
 
 import com.example.toyproject_server.MenuDatabase.StoreMenuItem
 import com.example.toyproject_server.MenuDatabase.MenuService
-import com.example.toyproject_server.PlaceChineseDataBase.PlaceChineseService
 import com.example.toyproject_server.PlaceDatabase.PlaceService
-import com.example.toyproject_server.PlaceJapanDataBase.PlaceJapanService
-import com.example.toyproject_server.PlaceKoreanDataBase.PlaceKoreanService
-import com.example.toyproject_server.PlaceWesternDataBase.PlaceWesternService
 import com.example.toyproject_server.RequiredQueryDatabase.QueryData
 import com.example.toyproject_server.RequiredQueryDatabase.QueryService
 import com.example.toyproject_server.RestAPI.PlaceDocument
@@ -26,15 +22,6 @@ class MyserverController {
 
     @Autowired
     private lateinit var placeService : PlaceService
-    @Autowired
-    private lateinit var placekoreanService : PlaceKoreanService
-    @Autowired
-    private lateinit var placejapanService : PlaceJapanService
-    @Autowired
-    private lateinit var placechineseService : PlaceChineseService
-    @Autowired
-    private lateinit var placewesternService : PlaceWesternService
-
 
 
     @GetMapping("/myServerKakao") //카카오 api로 지도 받아오는 서버.
@@ -43,97 +30,45 @@ class MyserverController {
 
         //여기서 DB폭 늘려야 함.
         //카카오 서버로부터 데이터 찾아서 디비에 넣어주기. //DB에 가게별 음식들도 등록을 해주어야 한다.
-        if (query == "한식") {
-            val final_storelist_ids = KoreaService(userLng, userLat)  // 1) DB에 가게 등록
-            menuService.makeMenus(final_storelist_ids)// 자동화 에바 (원래라면 API에서 주어야 함)    // 2) 가게마다 메뉴 등록
-        }
-        else if (query == "일식") {
-            val final_storelist_ids = JapanService(userLng, userLat)
-            menuService.makeMenus(final_storelist_ids)
-        }
-        else if (query == "중식") {
-            val final_storelist_ids = ChineseService(userLng, userLat)
-            menuService.makeMenus(final_storelist_ids)
-        }
-        else if (query == "양식") {
-            val final_storelist_ids = WesternService(userLng, userLat)
-            menuService.makeMenus(final_storelist_ids)
-        }
-        else {
-            val final_storelist_ids = Service(userLng, userLat)
-            menuService.makeMenus(final_storelist_ids)
-        }
+        val final_storelist_ids = Service(userLng, userLat, query)
+        // menuService.makeMenus(final_storelist_ids) //메뉴생성은 무시!!!!!!!!!!!!!!!!!!!!!!!!!!(일단!!!!!!!!!!)
 
     }
 
-    private fun KoreaService( userLng: Double, userLat: Double) : MutableList<String>{
-        val querylist : MutableList<String> = mutableListOf()
-        querylist.add("한식")
-        querylist.add("한정식")
-        querylist.add("가정식")
-        querylist.add("korean")
-        querylist.add("집밥")
 
+    private fun Service(userLng: Double, userLat: Double, query : String) : MutableList<String>{
+        val querylist : MutableList<String> = mutableListOf()
         val storelist_ids : MutableList<String> = mutableListOf()
-        for (query in querylist){
-            placekoreanService.saveAll(query, userLng, userLat)?.let { storelist_ids.addAll(it) }
+
+        if (query == "한식"){
+            querylist.add("한식")
+            querylist.add("한정식")
+            querylist.add("가정식")
+            querylist.add("korean")
+            querylist.add("집밥")
         }
-        return storelist_ids
-    }
-
-    private fun JapanService( userLng: Double, userLat: Double) : MutableList<String> {
-        val querylist : MutableList<String> = mutableListOf()
-        querylist.add("일식")
-        querylist.add("일본가정식")
-        querylist.add("japanese")
-        querylist.add("일본")
-
-        val storelist_ids : MutableList<String> = mutableListOf()
-        for (query in querylist){
-            placekoreanService.saveAll(query, userLng, userLat)?.let { storelist_ids.addAll(it) }
+        else if (query == "일식"){
+            querylist.add("일식")
+            querylist.add("일본가정식")
+            querylist.add("japanese")
+            querylist.add("일본")
         }
-        return storelist_ids
-    }
-
-    private fun ChineseService( userLng: Double, userLat: Double) : MutableList<String> {
-        val querylist : MutableList<String> = mutableListOf()
-        querylist.add("중식")
-        querylist.add("중국집")
-        querylist.add("중화요리")
-        querylist.add("중국")
-        querylist.add("Chinese")
-
-        val storelist_ids : MutableList<String> = mutableListOf()
-        for (query in querylist){
-            placekoreanService.saveAll(query, userLng, userLat)?.let { storelist_ids.addAll(it) }
+        else if (query == "중식"){
+            querylist.add("중식")
+            querylist.add("중국집")
+            querylist.add("중화요리")
+            querylist.add("중국")
+            querylist.add("Chinese")
         }
-        return storelist_ids
-    }
-
-    private fun WesternService( userLng: Double, userLat: Double) : MutableList<String> {
-        val querylist : MutableList<String> = mutableListOf()
-        querylist.add("양식")
-        querylist.add("파스타")
-        querylist.add("레스토랑")
-
-        val storelist_ids : MutableList<String> = mutableListOf()
-        for (query in querylist){
-            placekoreanService.saveAll(query, userLng, userLat)?.let { storelist_ids.addAll(it) }
+        else if (query == "양식"){
+            querylist.add("양식")
+            querylist.add("파스타")
+            querylist.add("레스토랑")
         }
-        return storelist_ids
-    }
+        else return storelist_ids  //query == "음식점"일 경우 저장하지않는다.
 
-    private fun Service( userLng: Double, userLat: Double) : MutableList<String> {
-        val querylist : MutableList<String> = mutableListOf()
-
-        querylist.add("음식점")
-        querylist.add("맛집")
-        querylist.add("가정식")
-        querylist.add("집밥")
-
-        val storelist_ids : MutableList<String> = mutableListOf()
-        for (query in querylist){
-            placeService.saveAll(query, userLng, userLat)?.let { storelist_ids.addAll(it) }
+        for ( i in querylist){
+            placeService.saveAll( i, userLng, userLat, query)?.let { storelist_ids.addAll(it) }
         }
         return storelist_ids
     }
@@ -153,12 +88,10 @@ class MyserverController {
         }
 
         lateinit var resultStorelistdata : List<PlaceDocument>
-        if (query == "한식")  resultStorelistdata = placekoreanService.getAll(query, userLng, userLat)
-        else if (query == "일식") resultStorelistdata = placejapanService.getAll(query, userLng, userLat)
-        else if (query == "중식") resultStorelistdata = placechineseService.getAll(query, userLng, userLat)
-        else if (query == "양식") resultStorelistdata = placewesternService.getAll(query, userLng, userLat)
-        else resultStorelistdata = placeService.getAll(query, userLng, userLat)
 
+        if (query == "음식점")  resultStorelistdata = placeService.getAll(userLng, userLat)
+        else resultStorelistdata = placeService.getCategoryAll(query, userLng, userLat)
+        println("쿼리= " + query + " 가져온 정보 =  " + resultStorelistdata + " !!!!")
         return resultStorelistdata
     }
 
@@ -169,15 +102,5 @@ class MyserverController {
     }
 
 
-    /*
-    @GetMapping("/tonyedu") //예시 참고용용
-   fun tony(query: String?) : List<Response>?{ //Null값 처리.
-        //받아온 값 어케 처리 해주지.
-        return listOf(Response(query), Response(query))
-    }
-
-    class Response constructor(query: String?){ //input(위도, 경도, 쿼리) 받아야댐.
-        lateinit var name : String
-    }*/
 }
 

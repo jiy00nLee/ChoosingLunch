@@ -23,19 +23,28 @@ class MyserverRepository {
                 }
         }
     }
-
-    var livedata_resultplaces : MutableLiveData<List<PlaceDocument>?> = MutableLiveData()
     var livedata_resultplacemenus : MutableLiveData<List<StoreMenuItem>?> = MutableLiveData()
+    var livedata_resultplacesAll : MutableLiveData<List<PlaceDocument>?> = MutableLiveData()
+    var livedata_resultplacesKorean : MutableLiveData<List<PlaceDocument>?> = MutableLiveData()
+    var livedata_resultplacesJapanese : MutableLiveData<List<PlaceDocument>?> = MutableLiveData()
+    var livedata_resultplacesChinese : MutableLiveData<List<PlaceDocument>?> = MutableLiveData()
+    var livedata_resultplacesWestern : MutableLiveData<List<PlaceDocument>?> = MutableLiveData()
+
 
     fun getStoreList(storecategory : String, userLat: Double, userLng: Double, storeaddres: String ) {
 
-        //val myserverAPI = Myserver.create()
         val call =  myserverAPI.getSearchLocationFromMyserverDatabase(storecategory, userLat, userLng, storeaddres)
 
         call.enqueue(object : Callback<List<PlaceDocument>> {
             //통신 성공
             override fun onResponse(call: Call<List<PlaceDocument>>, response: Response<List<PlaceDocument>>) {
-                livedata_resultplaces.value = response.body()
+
+                if (storecategory == "음식점") livedata_resultplacesAll.value = response.body()
+                else if (storecategory == "한식") livedata_resultplacesKorean.value = response.body()
+                else if (storecategory == "일식") livedata_resultplacesJapanese.value = response.body()
+                else if (storecategory == "중식") livedata_resultplacesChinese.value = response.body()
+                else if (storecategory == "양식") livedata_resultplacesWestern.value = response.body()
+
                 //Log.e(ContentValues.TAG,"${livedata_resultplaces.value}")
             }
             //통신 실패
@@ -51,6 +60,7 @@ class MyserverRepository {
         call.enqueue(object : Callback<List<StoreMenuItem>> {
             //통신 성공
             override fun onResponse(call: Call<List<StoreMenuItem>>, response: Response<List<StoreMenuItem>>) {
+
                 livedata_resultplacemenus.value = response.body()
             }
             //통신 실패

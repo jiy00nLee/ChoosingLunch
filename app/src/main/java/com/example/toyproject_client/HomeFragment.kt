@@ -104,6 +104,7 @@ class HomeFragment : Fragment() {
     private inner class PageChangeCallback: ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
             super.onPageSelected(position)
+            Log.e("current position", position.toString())
             main_bottom_navigation.selectedItemId = when (position) {
                 0 -> R.id.btn_all
                 1 -> R.id.btn_korean

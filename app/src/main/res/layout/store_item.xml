@@ -3,11 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" >
-    <data>
-        <variable
-            name="StoreItem"
-            type="com.example.toyproject_client.myserver.PlaceDocument" />
-    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -46,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="top"
                         android:layout_marginBottom="8dp"
-                        android:text="@{StoreItem.place_name}"
+                        android:text="가게이름"
                         android:textSize="18dp"
                         android:textStyle="bold" />
 
@@ -55,7 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
-                        android:text="@{StoreItem.category_name}"
+                        android:text="가게카테고리"
                         android:textSize="12dp" />
 
                     <TextView
@@ -63,7 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="3dp"
-                        android:text="@{StoreItem.road_address_name}"
+                        android:text="가게주소"
                         android:textSize="12dp" />
                 </LinearLayout>
             </LinearLayout>

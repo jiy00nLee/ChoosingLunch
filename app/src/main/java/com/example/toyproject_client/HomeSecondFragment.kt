@@ -35,6 +35,7 @@ class HomeSecondFragment : Fragment() {
             userLng = it.longtitude
             useraddress = it.address
             viewModel.getStoreList("한식", userLng, userLat, useraddress).observe(viewLifecycleOwner){resultStorelist ->
+                Log.e("들어온 데이터 (한식 ) " , "${resultStorelist}")
                 showRecyclerView(resultStorelist)
             }
         }

@@ -28,11 +28,18 @@ class UserDataViewmodel (application: Application) : AndroidViewModel(applicatio
     }
 
 
-    fun getStoreList(storecategory : String, userLat: Double, userLng: Double, storeaddres: String ) : MutableLiveData<List<PlaceDocument>?>  {
+    fun getStoreList(categoryname : String, userLat: Double, userLng: Double, storeaddres: String ) : MutableLiveData<List<PlaceDocument>?>  {
+        
+        myserverRepository.getStoreList(categoryname, userLat, userLng, storeaddres)
+        lateinit var Resultlist : MutableLiveData<List<PlaceDocument>?>
 
-        myserverRepository.getStoreList(storecategory, userLat, userLng, storeaddres)
+        if (categoryname == "음식점") Resultlist= myserverRepository.livedata_resultplacesAll
+        else if (categoryname == "한식") Resultlist= myserverRepository.livedata_resultplacesKorean
+        else if (categoryname == "일식") Resultlist= myserverRepository.livedata_resultplacesJapanese
+        else if (categoryname == "중식") Resultlist= myserverRepository.livedata_resultplacesChinese
+        else if (categoryname == "양식") Resultlist= myserverRepository.livedata_resultplacesWestern
 
-        return myserverRepository.livedata_resultplaces
+        return Resultlist
 
         //val resultplaces = myserverAPI.getSearchLocationFromMyserver(storecategory, userLat, userLng).execute().body()
        // livedata_resultplaces.value = resultplaces

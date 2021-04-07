@@ -37,6 +37,7 @@ class HomeFirstFragment : Fragment() {
             useraddress = it.address
 
             viewModel.getStoreList("음식점", userLng, userLat, useraddress).observe(viewLifecycleOwner){resultStorelist ->
+                Log.e("들어온 데이터 (전체) " , "${resultStorelist}")
                 showRecyclerView(resultStorelist)
             }
         }

@@ -22,7 +22,8 @@
     <fragment
         android:id="@+id/insertLocationInfoFragment"
         android:name="com.example.toyproject_client.InsertLocationInfoFragment"
-        android:label="InsertLocationInfoFragment" >
+        android:label="InsertLocationInfoFragment"
+        app:startDestination="@id/action_insertLocationInfoFragment_to_homeFragment">
         <action
             android:id="@+id/action_insertLocationInfoFragment_to_homeFragment"
             app:popUpTo="@id/homeFragment" />

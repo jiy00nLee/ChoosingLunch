@@ -38,7 +38,6 @@ class FavoriteStoreInfoFragment : Fragment() {
     private fun showRecyclerView(favoritestorelist: List<PlaceDocument>?) {
 
         adapterFavoriteStore = Store_RecyclerViewAdapter(favoritestorelist!!) { placeDocument ->
-            Log.d("Checking!!", "${placeDocument}")
             val bundle = Bundle()
             bundle?.putParcelable("selectedStore", placeDocument)
             findNavController().navigate(R.id.action_favoriteStoreInfoFragment_to_storeInfoFragment, bundle )

@@ -1,7 +1,5 @@
 package com.example.toyproject_server.MenuDatabase
 
-import com.example.toyproject_server.PlaceChineseDataBase.PlaceChinese
-import com.example.toyproject_server.RestAPI.PlaceDocument
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.transaction.annotation.Transactional
 
