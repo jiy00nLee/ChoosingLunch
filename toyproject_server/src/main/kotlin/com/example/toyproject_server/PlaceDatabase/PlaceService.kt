@@ -11,7 +11,7 @@ import java.lang.Math.*
 
 @Transactional
 class PlaceService {
-    private val R = 6372.8 * 1000
+    //private val R = 6372.8 * 1000
 
     private val placeRepository : PlaceRepository
     @Autowired

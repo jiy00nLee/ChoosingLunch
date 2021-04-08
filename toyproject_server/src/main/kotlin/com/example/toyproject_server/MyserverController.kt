@@ -31,7 +31,7 @@ class MyserverController {
         //여기서 DB폭 늘려야 함.
         //카카오 서버로부터 데이터 찾아서 디비에 넣어주기. //DB에 가게별 음식들도 등록을 해주어야 한다.
         val final_storelist_ids = Service(userLng, userLat, query)
-        // menuService.makeMenus(final_storelist_ids) //메뉴생성은 무시!!!!!!!!!!!!!!!!!!!!!!!!!!(일단!!!!!!!!!!)
+        menuService.makeMenus(final_storelist_ids)
 
     }
 

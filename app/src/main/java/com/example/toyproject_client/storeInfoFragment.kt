@@ -7,9 +7,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.toyproject_client.data.FavoriteStoreViewmodel
 import com.example.toyproject_client.data.StoreInfoViewmodel
 import com.example.toyproject_client.data.StoreMenuItem
@@ -21,6 +24,8 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import kotlinx.android.synthetic.main.fragment_storeinfo.*
 import kotlinx.android.synthetic.main.fragment_storeinfo.recyclerView
+import kotlinx.android.synthetic.main.store_menu_item.*
+import kotlinx.android.synthetic.main.store_menu_item.view.*
 
 class storeInfoFragment : Fragment(), OnMapReadyCallback {
 
@@ -34,7 +39,8 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
 
     // 리사이클러뷰 정보
     private lateinit var adapterStore: Menu_RecyclerViewAdapter
-    var storeMenues : List<StoreMenuItem> = listOf()
+    lateinit var viewHolder : Menu_RecyclerViewAdapter.SearchViewHolder
+    //var storeMenues : List<StoreMenuItem> = listOf()
 
 
     //Map 띄우기 위한 정보
@@ -44,8 +50,9 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
     private var naverMap: NaverMap? = null
 
     //버튼 바꿀 때 필요한 정보 정보
-    var clickstate : Boolean = false  //임의의 값
+    var clickstate : Boolean = false  // 좋아하는 가게로 눌려졌는지 여부
     private lateinit var storeID : String
+    private var Menucounts : MutableMap<String, Int> = mutableMapOf()
 
 
 
@@ -82,8 +89,12 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
             changeButtonImage(clickstate)
             controlFavoriteStore(clickstate)
         }
-
+        mycart_btn.setOnClickListener {
+            findNavController().navigate(R.id.action_storeInfoFragment_to_myCartFragment)
+        }
     }
+
+
     fun changeButtonImage(clickstate : Boolean){
         if (clickstate == true) like_btn.setImageResource(R.drawable.selectedlikebutton)
         else like_btn.setImageResource(R.drawable.likebutton)
@@ -135,7 +146,6 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun makeView(storeID : String){
-
         binding.storeItem = receivedItemdata
 
         //해당 가게의 음식들을 가져와야 한다. (메뉴 표현)
@@ -143,8 +153,64 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
             adapterStore = Menu_RecyclerViewAdapter(storeMenuItemList!!)
             recyclerView.adapter = adapterStore
 
+            initRecyclerView_clickListener()    //클릭리스너
+            storeMenuItemList.forEach { storeMenuItem ->  Menucounts.put(storeMenuItem.menuname, 1)  } //클릭리스너 내부에서 아이템클릭여부(list) 사용위해 초기화 (한번)
+
         }
     }
+    //-------------------------------------------------------------------------------------------------------------------------------------------------메뉴클릭 관련 함수들------------------------------
+
+    private fun initRecyclerView_clickListener() {
+        adapterStore.apply {
+            listener = object : Menu_RecyclerViewAdapter.MenuItemClickListener{
+            lateinit var menuname : String
+                override fun menuItemCheckClickListener(view : View, position: Int, item: StoreMenuItem) {
+                    //showCountLayoutView(viewHolder)
+                    menuname = item.menuname
+                    showCountLayoutView(position, 0, menuname)
+                }
+                override fun menuItemMinusClickListener(view : View, position: Int, item: StoreMenuItem) {
+                    menuname = item.menuname
+                    showCountLayoutView(position, 1, menuname)
+                }
+
+                override fun menuItemPlusClickListener(view : View, position: Int, item: StoreMenuItem) {
+                    menuname = item.menuname
+                    showCountLayoutView(position, 2, menuname)
+
+                }
+            }
+        }
+    }
+
+    private fun showCountLayoutView(position: Int, mode : Int, menuname : String){
+        viewHolder = recyclerView.findViewHolderForAdapterPosition(position) as Menu_RecyclerViewAdapter.SearchViewHolder
+
+        var countnum = Menucounts[menuname]!!
+
+        when (mode) {
+            0 -> {
+                if (menuItemSelectbtn.isChecked) { viewHolder.itemView.Countinglayout.visibility = View.VISIBLE }
+                else {  viewHolder.itemView.Countinglayout.visibility = View.GONE }  }
+            1 -> {
+                if (countnum > 1)  {  countnum -= 1
+                    Menucounts.replace(menuname, countnum)
+                    viewHolder.itemView.Countingtext.text = countnum.toString() + " 개"}
+                else Toast.makeText(context, "최소 1개의 수량은 필요합니다.", Toast.LENGTH_SHORT).show()
+            }
+            2 -> { countnum += 1
+                Menucounts.replace(menuname, countnum)
+                viewHolder.itemView.Countingtext.text = countnum.toString() + " 개" }
+        }
+    }
+
+    /*
+    private fun showCountLayoutView(viewHolder : RecyclerView.ViewHolder){      에러나는 방법.
+        if (menuItemSelectbtn.isChecked) {   viewHolder.itemView.Countinglayout.visibility = View.VISIBLE }
+        else {  viewHolder.itemView.Countinglayout.visibility = View.GONE }
+    }*/
+
+
 
 
 

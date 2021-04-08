@@ -34,7 +34,6 @@ class HomeFourthFragment : Fragment() {
             userLng = it.longtitude
             useraddress = it.address
             viewModel.getStoreList("일식", userLng, userLat, useraddress).observe(viewLifecycleOwner){resultStorelist ->
-                Log.e("들어온 데이터 (일식 ) " , "${resultStorelist}")
                 showRecyclerView(resultStorelist)
             }
         }

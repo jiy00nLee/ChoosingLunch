@@ -21,6 +21,7 @@ class HomeFragment : Fragment() {
 
     //사용자 정보 변수들.
     private lateinit var useraddress: String
+    private var useraddresslist : MutableList<String> = mutableListOf()
 
     private var userLat: Double = 0.0
     private var userLng: Double = 0.0
@@ -40,6 +41,9 @@ class HomeFragment : Fragment() {
                 useraddress = it.address
                 userLat = it.latitude
                 userLng = it.longtitude
+
+                useraddresslist = useraddress.split(" ") as MutableList<String>
+                useraddress = useraddresslist[2] + " " +  useraddresslist[3] + " " +  useraddresslist[4]  //아 마 주소 형식 같을듯
                 userlocation.text = useraddress //주소같은 경우 xml로 표현해주기.
         }
 
@@ -51,12 +55,16 @@ class HomeFragment : Fragment() {
 
         initViewPager()
 
-        location_btn.setOnClickListener {
+        userlocation.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_insertLocationInfoFragment)
         }
 
         favoritestore_btn.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_favoriteStoreInfoFragment)
+        }
+
+        mycart_btn.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_myCartFragment)
         }
     }
 

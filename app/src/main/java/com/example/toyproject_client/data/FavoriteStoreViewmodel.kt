@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class FavoriteStoreViewmodel (application: Application) : AndroidViewModel(application) {
 
-    private val favoriteStoreRepository = FavoriteStoreRepository(AppDatabase.getDatabase(application, viewModelScope))
+    private val favoriteStoreRepository = FavoriteStoreRepository.getInstance(AppDatabase.getDatabase(application, viewModelScope))
 
     /*
     companion object{

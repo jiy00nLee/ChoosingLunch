@@ -14,7 +14,6 @@ class Store_RecyclerViewAdapter(var received_items : List<PlaceDocument>, var it
     //private lateinit var binding : StoreItemBinding
 
     override fun getItemCount(): Int {
-        Log.e("ddddd!!!", "${received_items.size}")
         return received_items.size
     }
 
@@ -25,8 +24,6 @@ class Store_RecyclerViewAdapter(var received_items : List<PlaceDocument>, var it
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         holder.bind(received_items[position])    //리스트에서 하나를 뽑아서 (커스텀)뷰홀더에 전달해줌.
-        Log.e("ddddd!!!!!!data", "${received_items[position]}")
-        Log.e("ddddd!!!!!!position", "${position}")
     }
 
 
@@ -35,7 +32,6 @@ class Store_RecyclerViewAdapter(var received_items : List<PlaceDocument>, var it
     {
         fun bind (data : PlaceDocument){
             //binding.storeItem = data //하나를 binding.
-            Log.e("ddddd!!!!!!들어왔음", "${data}")
             itemView.storePlacename.text = data.place_name
             itemView.storeCategoryname.text = data.category_name
             itemView.storePlacelocation.text = data.road_address_name

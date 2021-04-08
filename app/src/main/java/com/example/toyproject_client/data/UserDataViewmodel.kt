@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class UserDataViewmodel (application: Application) : AndroidViewModel(application) {
 
-    private val userdataRepository = UserDataRepository(AppDatabase.getDatabase(application, viewModelScope))
+    private val userdataRepository = UserDataRepository.getInstance(AppDatabase.getDatabase(application, viewModelScope))
     private val myserverRepository = MyserverRepository.getInstance()
 
 
@@ -29,7 +29,7 @@ class UserDataViewmodel (application: Application) : AndroidViewModel(applicatio
 
 
     fun getStoreList(categoryname : String, userLat: Double, userLng: Double, storeaddres: String ) : MutableLiveData<List<PlaceDocument>?>  {
-        
+
         myserverRepository.getStoreList(categoryname, userLat, userLng, storeaddres)
         lateinit var Resultlist : MutableLiveData<List<PlaceDocument>?>
 

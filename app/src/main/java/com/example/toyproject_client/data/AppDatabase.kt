@@ -6,6 +6,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.toyproject_client.data.MenuInfoData.MenuInfoDao
+import com.example.toyproject_client.data.MenuInfoData.MenuInfoEntity
 import com.example.toyproject_client.data.favoriteStoreData.FavoriteStoreDao
 import com.example.toyproject_client.data.favoriteStoreData.FavoriteStoreEntity
 import com.example.toyproject_client.data.UserData.UserDataDao
@@ -14,10 +16,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
-@Database(entities = arrayOf(UserDataEntity::class, FavoriteStoreEntity::class), version = 2, exportSchema = false)
+@Database(entities = arrayOf(UserDataEntity::class, FavoriteStoreEntity::class, MenuInfoEntity::class), version = 3, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun UserDataDao(): UserDataDao
     abstract fun FavoriteStoreDao() : FavoriteStoreDao
+    abstract fun MenuInfoDao() : MenuInfoDao
 
     companion object {
         @Volatile
@@ -42,7 +45,6 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 
-
     private class AppDatabaseCallback(      //이전에 만들어진 정보가 있는 경우 (null이 아닌경우), 그 정보를 가져온다.
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
@@ -53,6 +55,7 @@ abstract class AppDatabase : RoomDatabase() {
                 scope.launch {
                     UserDatabase(database.UserDataDao())
                     FavoriteStoreDatabase(database.FavoriteStoreDao())
+                    MenuInfoDatabase(database.MenuInfoDao())
                 }
             }
         }
@@ -60,9 +63,8 @@ abstract class AppDatabase : RoomDatabase() {
         suspend fun UserDatabase(userdataDao: UserDataDao) {
             //LocationDao.insert(LocationEntity("Lilly","여",1)) //초기 데이터 넣어주기.(ex.서버) -> 이번어플에서는 X.
         }
-        suspend fun FavoriteStoreDatabase(favoritestoreDao : FavoriteStoreDao){
-
-        }
+        suspend fun FavoriteStoreDatabase(favoritestoreDao : FavoriteStoreDao){ }
+        suspend fun MenuInfoDatabase(menuInfoDao: MenuInfoDao) {}
     }
 
 }
