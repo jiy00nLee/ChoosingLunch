@@ -14,7 +14,7 @@ class StoreInfoViewmodel (application: Application) : AndroidViewModel(applicati
     private val menuInfoRepository =  NenuInfoRepository.getInstance(AppDatabase.getDatabase(application, viewModelScope))
 
 
-    fun getStoreMenuList(storeid : String) : MutableLiveData<List<StoreMenuItem>?> {
+    fun getStoreMenuList(storeid : String) : MutableLiveData<List<StoreMenuItem>> {
         myserverRepository.getStoreMenuList(storeid)
         return myserverRepository.livedata_resultplacemenus
     }

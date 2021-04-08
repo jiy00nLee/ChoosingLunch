@@ -28,10 +28,10 @@ class UserDataViewmodel (application: Application) : AndroidViewModel(applicatio
     }
 
 
-    fun getStoreList(categoryname : String, userLat: Double, userLng: Double, storeaddres: String ) : MutableLiveData<List<PlaceDocument>?>  {
+    fun getStoreList(categoryname : String, userLat: Double, userLng: Double, storeaddres: String ) : MutableLiveData<List<PlaceDocument>>  {
 
         myserverRepository.getStoreList(categoryname, userLat, userLng, storeaddres)
-        lateinit var Resultlist : MutableLiveData<List<PlaceDocument>?>
+        lateinit var Resultlist : MutableLiveData<List<PlaceDocument>>
 
         if (categoryname == "음식점") Resultlist= myserverRepository.livedata_resultplacesAll
         else if (categoryname == "한식") Resultlist= myserverRepository.livedata_resultplacesKorean

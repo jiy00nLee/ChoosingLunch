@@ -11,7 +11,6 @@ import java.lang.Math.*
 
 @Transactional
 class PlaceService {
-    //private val R = 6372.8 * 1000
 
     private val placeRepository : PlaceRepository
     @Autowired
@@ -83,9 +82,12 @@ class PlaceService {
         distance = toDegrees(distance)
         distance = distance*60*(1.1515)*(1.609344) //단위 : 킬로미터(km)2
 
-        if (distance < 1000) {return true}  //1km이내인 정보만 출력해줌.
+        println(place.placename + distance)
+        if (distance < 1) {return true}  //1km이내인 정보만 출력해줌.
         return false
     }
+
+
 
     /*
     private fun calculateDistance(x: Double, y : Double, place :Place) : Boolean {

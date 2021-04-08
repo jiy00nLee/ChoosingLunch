@@ -36,6 +36,7 @@
             android:gravity="center"
             android:minWidth="0dp"
             android:minHeight="0dp"
+            android:background="#00FF0000"
             android:text="즐겨찾기" />
         <Button
             android:id="@+id/mycart_btn"
@@ -45,6 +46,7 @@
             android:gravity="center"
             android:minWidth="0dp"
             android:minHeight="0dp"
+            android:background="#00FF0000"
             android:text="장바구니" />
     </LinearLayout>
     <LinearLayout

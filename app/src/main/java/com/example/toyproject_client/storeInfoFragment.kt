@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -40,7 +42,6 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
     // 리사이클러뷰 정보
     private lateinit var adapterStore: Menu_RecyclerViewAdapter
     lateinit var viewHolder : Menu_RecyclerViewAdapter.SearchViewHolder
-    //var storeMenues : List<StoreMenuItem> = listOf()
 
 
     //Map 띄우기 위한 정보
@@ -89,9 +90,19 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
             changeButtonImage(clickstate)
             controlFavoriteStore(clickstate)
         }
+
+        getFoodToMyCartbtn.setOnClickListener {
+            val bundle = Bundle()
+            for (menucount in Menucounts){  bundle.putInt(menucount.key, menucount.value) }
+            bundle.putString("가게이름", storeID)
+            findNavController().navigate(R.id.action_storeInfoFragment_to_myCartFragment, bundle)   //넘겨받아서 가게의 메뉴 정보 가져오기.!
+        }
+
         mycart_btn.setOnClickListener {
             findNavController().navigate(R.id.action_storeInfoFragment_to_myCartFragment)
         }
+
+
     }
 
 
@@ -154,11 +165,14 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
             recyclerView.adapter = adapterStore
 
             initRecyclerView_clickListener()    //클릭리스너
-            storeMenuItemList.forEach { storeMenuItem ->  Menucounts.put(storeMenuItem.menuname, 1)  } //클릭리스너 내부에서 아이템클릭여부(list) 사용위해 초기화 (한번)
+            storeMenuItemList.forEach { storeMenuItem ->  Menucounts.put(storeMenuItem.menuname, 0)  } //클릭리스너 내부에서 아이템클릭여부(list) 사용위해 초기화 (한번)
 
         }
     }
     //-------------------------------------------------------------------------------------------------------------------------------------------------메뉴클릭 관련 함수들------------------------------
+
+    //private fun calculate
+
 
     private fun initRecyclerView_clickListener() {
         adapterStore.apply {
@@ -187,11 +201,15 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
         viewHolder = recyclerView.findViewHolderForAdapterPosition(position) as Menu_RecyclerViewAdapter.SearchViewHolder
 
         var countnum = Menucounts[menuname]!!
+        Log.e("ddd", "${position}, ${menuItemSelectbtn.isChecked}")
 
         when (mode) {
             0 -> {
-                if (menuItemSelectbtn.isChecked) { viewHolder.itemView.Countinglayout.visibility = View.VISIBLE }
-                else {  viewHolder.itemView.Countinglayout.visibility = View.GONE }  }
+                if (viewHolder.itemView.menuItemSelectbtn.isChecked) { Menucounts.replace(menuname, 1)
+                    viewHolder.itemView.Countingtext.text = "1 개"
+                    viewHolder.itemView.Countinglayout.visibility = VISIBLE }
+                else { Menucounts.replace(menuname, 0)
+                    viewHolder.itemView.Countinglayout.visibility = GONE }  }
             1 -> {
                 if (countnum > 1)  {  countnum -= 1
                     Menucounts.replace(menuname, countnum)
@@ -202,6 +220,8 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
                 Menucounts.replace(menuname, countnum)
                 viewHolder.itemView.Countingtext.text = countnum.toString() + " 개" }
         }
+
+        //Log.e("dddd", "${Menucounts.toString()}")
     }
 
     /*

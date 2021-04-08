@@ -23,12 +23,12 @@ class MyserverRepository {
                 }
         }
     }
-    var livedata_resultplacemenus : MutableLiveData<List<StoreMenuItem>?> = MutableLiveData()
-    var livedata_resultplacesAll : MutableLiveData<List<PlaceDocument>?> = MutableLiveData()
-    var livedata_resultplacesKorean : MutableLiveData<List<PlaceDocument>?> = MutableLiveData()
-    var livedata_resultplacesJapanese : MutableLiveData<List<PlaceDocument>?> = MutableLiveData()
-    var livedata_resultplacesChinese : MutableLiveData<List<PlaceDocument>?> = MutableLiveData()
-    var livedata_resultplacesWestern : MutableLiveData<List<PlaceDocument>?> = MutableLiveData()
+    val livedata_resultplacemenus : MutableLiveData<List<StoreMenuItem>> = MutableLiveData()
+    val livedata_resultplacesAll : MutableLiveData<List<PlaceDocument>> = MutableLiveData()
+    val livedata_resultplacesKorean : MutableLiveData<List<PlaceDocument>> = MutableLiveData()
+    val livedata_resultplacesJapanese : MutableLiveData<List<PlaceDocument>> = MutableLiveData()
+    val livedata_resultplacesChinese : MutableLiveData<List<PlaceDocument>> = MutableLiveData()
+    val livedata_resultplacesWestern : MutableLiveData<List<PlaceDocument>> = MutableLiveData()
 
 
     fun getStoreList(storecategory : String, userLat: Double, userLng: Double, storeaddres: String ) {
