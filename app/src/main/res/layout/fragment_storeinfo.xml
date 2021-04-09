@@ -16,6 +16,7 @@
             android:id="@+id/TitleLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:layout_weight="1" >
             <View
@@ -129,13 +130,14 @@
                         android:layout_height="wrap_content"
                         android:scrollbars="vertical"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        android:visibility="gone"
                         tools:listitem="@layout/selected_store_menu_item"/>
                     <Button
                         android:id="@+id/getFoodToMyCartbtn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="20dp"
-                        android:text="담긴 항목이 없습니다."
+                        android:text="장바구니 담기"
                         android:layout_marginTop="20dp"
                         android:layout_gravity="center"  />
                 </LinearLayout>

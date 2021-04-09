@@ -1,14 +1,13 @@
 package com.example.toyproject_client
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toyproject_client.data.StoreMenuItem
 import kotlinx.android.synthetic.main.store_menu_item.view.*
 
 
-class SelectedMenu_RecyclerAdapter(val received_menuitems : List<StoreMenuItem>) : RecyclerView.Adapter<SelectedMenu_RecyclerAdapter.SearchViewHolder>() {
+class SelectedMenu_RecyclerViewAdapter(val received_menuitems : List<StoreMenuItem>) : RecyclerView.Adapter<SelectedMenu_RecyclerViewAdapter.SearchViewHolder>() {
     //클릭리스너 인터페이스 넘겨주기9
 
 

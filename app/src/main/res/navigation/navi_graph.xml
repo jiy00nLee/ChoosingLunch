@@ -50,5 +50,10 @@
     <fragment
         android:id="@+id/myCartFragment"
         android:name="com.example.toyproject_client.MyCartFragment"
-        android:label="MyCartFragment" />
+        android:label="MyCartFragment">
+        <action
+            android:id="@+id/myCartFragment_pop"
+            app:popUpTo="@id/homeFragment"  />
+    </fragment>
+
 </navigation>

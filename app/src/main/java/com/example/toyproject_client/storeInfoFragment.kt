@@ -14,7 +14,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.example.toyproject_client.data.FavoriteStoreViewmodel
 import com.example.toyproject_client.data.StoreInfoViewmodel
 import com.example.toyproject_client.data.StoreMenuItem
@@ -53,7 +52,8 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
     //버튼 바꿀 때 필요한 정보 정보
     var clickstate : Boolean = false  // 좋아하는 가게로 눌려졌는지 여부
     private lateinit var storeID : String
-    private var Menucounts : MutableMap<String, Int> = mutableMapOf()
+    private var resultSelectedMenuItem : ArrayList<StoreMenuItem> = arrayListOf()
+    //private var Menucounts : MutableMap<String, Int> = mutableMapOf()
 
 
 
@@ -91,18 +91,22 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
             controlFavoriteStore(clickstate)
         }
 
+
         getFoodToMyCartbtn.setOnClickListener {
-            val bundle = Bundle()
-            for (menucount in Menucounts){  bundle.putInt(menucount.key, menucount.value) }
-            bundle.putString("가게이름", storeID)
-            findNavController().navigate(R.id.action_storeInfoFragment_to_myCartFragment, bundle)   //넘겨받아서 가게의 메뉴 정보 가져오기.!
+            val sendingbundlelist: ArrayList<StoreMenuItem> = resultSelectedMenuItem.clone() as ArrayList<StoreMenuItem> //얕은 복사 o (깊은 복사 x)
+            sendingbundlelist.removeIf { it.menucount ==0 }
+            if (sendingbundlelist.isEmpty()){ Toast.makeText(context, "담긴 음식이 없습니다.", Toast.LENGTH_SHORT).show()  }
+            else {
+                val bundle = Bundle()
+                bundle.putParcelableArrayList("selectedMenuItems", sendingbundlelist)
+                findNavController().navigate(R.id.action_storeInfoFragment_to_myCartFragment, bundle)   //넘겨받아서 가게의 메뉴 정보 가져오기.!
+            }
         }
+
 
         mycart_btn.setOnClickListener {
             findNavController().navigate(R.id.action_storeInfoFragment_to_myCartFragment)
         }
-
-
     }
 
 
@@ -165,8 +169,7 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
             recyclerView.adapter = adapterStore
 
             initRecyclerView_clickListener()    //클릭리스너
-            storeMenuItemList.forEach { storeMenuItem ->  Menucounts.put(storeMenuItem.menuname, 0)  } //클릭리스너 내부에서 아이템클릭여부(list) 사용위해 초기화 (한번)
-
+            storeMenuItemList.forEach { storeMenuItem ->  resultSelectedMenuItem.add(storeMenuItem)  } //클릭리스너 내부에서 아이템클릭여부(list) 사용위해 초기화 (한번)
         }
     }
     //-------------------------------------------------------------------------------------------------------------------------------------------------메뉴클릭 관련 함수들------------------------------
@@ -177,60 +180,55 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
     private fun initRecyclerView_clickListener() {
         adapterStore.apply {
             listener = object : Menu_RecyclerViewAdapter.MenuItemClickListener{
-            lateinit var menuname : String
                 override fun menuItemCheckClickListener(view : View, position: Int, item: StoreMenuItem) {
                     //showCountLayoutView(viewHolder)
-                    menuname = item.menuname
-                    showCountLayoutView(position, 0, menuname)
+                    showCountLayoutView(position, 0, item)
                 }
                 override fun menuItemMinusClickListener(view : View, position: Int, item: StoreMenuItem) {
-                    menuname = item.menuname
-                    showCountLayoutView(position, 1, menuname)
+                    showCountLayoutView(position, 1, item)
                 }
 
                 override fun menuItemPlusClickListener(view : View, position: Int, item: StoreMenuItem) {
-                    menuname = item.menuname
-                    showCountLayoutView(position, 2, menuname)
+                    showCountLayoutView(position, 2, item)
 
                 }
             }
         }
     }
 
-    private fun showCountLayoutView(position: Int, mode : Int, menuname : String){
+    private fun showCountLayoutView(position: Int, mode : Int, item: StoreMenuItem){
         viewHolder = recyclerView.findViewHolderForAdapterPosition(position) as Menu_RecyclerViewAdapter.SearchViewHolder
 
-        var countnum = Menucounts[menuname]!!
-        Log.e("ddd", "${position}, ${menuItemSelectbtn.isChecked}")
+        //var countnum = Menucounts[menuname]!!
 
         when (mode) {
             0 -> {
-                if (viewHolder.itemView.menuItemSelectbtn.isChecked) { Menucounts.replace(menuname, 1)
+                if (viewHolder.itemView.menuItemSelectbtn.isChecked) {  item.menucount = 1
                     viewHolder.itemView.Countingtext.text = "1 개"
                     viewHolder.itemView.Countinglayout.visibility = VISIBLE }
-                else { Menucounts.replace(menuname, 0)
+                else {  item.menucount = 0
                     viewHolder.itemView.Countinglayout.visibility = GONE }  }
             1 -> {
-                if (countnum > 1)  {  countnum -= 1
-                    Menucounts.replace(menuname, countnum)
-                    viewHolder.itemView.Countingtext.text = countnum.toString() + " 개"}
+                if ( item.menucount > 1)  {   item.menucount -=1
+                    viewHolder.itemView.Countingtext.text = item.menucount.toString() + " 개"}
                 else Toast.makeText(context, "최소 1개의 수량은 필요합니다.", Toast.LENGTH_SHORT).show()
             }
-            2 -> { countnum += 1
-                Menucounts.replace(menuname, countnum)
-                viewHolder.itemView.Countingtext.text = countnum.toString() + " 개" }
+            2 -> { item.menucount += 1
+                viewHolder.itemView.Countingtext.text = item.menucount.toString() + " 개" }
         }
+        Log.e("TAG!! before resultSelectedMenuItem", "${resultSelectedMenuItem}")
+            resultSelectedMenuItem.set(position, item)
+        Log.e("TAG!! after resultSelectedMenuItem", "${resultSelectedMenuItem}")
 
-        //Log.e("dddd", "${Menucounts.toString()}")
     }
+
+
 
     /*
     private fun showCountLayoutView(viewHolder : RecyclerView.ViewHolder){      에러나는 방법.
         if (menuItemSelectbtn.isChecked) {   viewHolder.itemView.Countinglayout.visibility = View.VISIBLE }
         else {  viewHolder.itemView.Countinglayout.visibility = View.GONE }
     }*/
-
-
 
 
 
