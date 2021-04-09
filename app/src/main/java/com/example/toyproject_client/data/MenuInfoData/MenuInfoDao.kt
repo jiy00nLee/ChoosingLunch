@@ -16,11 +16,11 @@ interface MenuInfoDao {
 
 
     //가게 별로 가져올 수 있게 구현해주어야 함!!!!!!!!!!!!!
-    @Query("SELECT StoreID from mycartTable")
-    fun getAllStoreIDsFromMycart() : LiveData<List<String>?>    //장바구니에 저장되어 있는 모든 가게 이름들 가져옴.
+    @Query("SELECT DISTINCT StoreID from mycartTable")
+    fun getAllStoreIDsFromMycart() : LiveData<List<String>>    //장바구니에 저장되어 있는 모든 가게 이름들 가져옴.(중복제거되나? X, )
 
     @Query("SELECT * from mycartTable WHERE StoreID = :storeID ")
-    fun getMenuInfoByStore(storeID : String) : LiveData<List<MenuInfoEntity>?>     // 한 가게의 다량의 메뉴들(list)
+    fun getMenuInfoListByStore(storeID : String) : LiveData<List<MenuInfoEntity>>     // 한 가게의 다량의 메뉴들(list)
 
 
 }

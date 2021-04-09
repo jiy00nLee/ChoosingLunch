@@ -1,14 +1,26 @@
 package com.example.toyproject_client
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.toyproject_client.data.MenuInfoData.CartMenuItem
 import com.example.toyproject_client.data.StoreMenuItem
+import kotlinx.android.synthetic.main.mycart_item.view.*
+import kotlinx.android.synthetic.main.mycart_item.view.menuItemSelectbtn
 import kotlinx.android.synthetic.main.store_menu_item.view.*
 
 
-class SelectedMenu_RecyclerViewAdapter(val received_menuitems : List<StoreMenuItem>) : RecyclerView.Adapter<SelectedMenu_RecyclerViewAdapter.SearchViewHolder>() {
-    //클릭리스너 인터페이스 넘겨주기9
+class SelectedMenu_RecyclerViewAdapter(val received_menuitems : MutableList<CartMenuItem>) : RecyclerView.Adapter<SelectedMenu_RecyclerViewAdapter.SearchViewHolder>() {
+    //클릭리스너 인터페이스 넘겨주기
+    var listener : MenuItemClickListener ?= null
+
+    interface MenuItemClickListener {
+        fun menuItemCheckClickListener(position: Int, item: CartMenuItem)
+        fun changeSelectedMenuClickListener(position: Int, item: CartMenuItem)
+
+    }
 
 
     override fun getItemCount(): Int {
@@ -26,15 +38,28 @@ class SelectedMenu_RecyclerViewAdapter(val received_menuitems : List<StoreMenuIt
 
     //binding : StoreMenuItemBinding , binding.root 대신
     inner class SearchViewHolder (parent: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.store_menu_item, parent, false)) //(커스텀) 뷰 홀더 -> '하나짜리 담당'! 생성할 '뷰'만 구성. (no clickinterface)
+        LayoutInflater.from(parent.context).inflate(R.layout.mycart_item, parent, false)) //(커스텀) 뷰 홀더 -> '하나짜리 담당'! 생성할 '뷰'만 구성. (no clickinterface)
     {
-        fun bind (data: StoreMenuItem){
-            // binding.storeMenuItems = data
-            val price = data.menuprice.toString() + "원"
-            itemView.menuName.text = data.menuname
-            itemView.menuPrice.text = price
+        fun bind (data: CartMenuItem){
+            val totalPrice = data.totalmenuprice.toString() + "원"
+            itemView.StoreName.text = data.storename
+            itemView.selectedMenues.text = data.menuinfotext
+            itemView.totalMenuPrice.text = totalPrice
         }
+        init {
+            //체크버튼이 눌러졌을 때.
+            itemView.menuItemSelectbtn.setOnClickListener{
+                listener?.menuItemCheckClickListener(adapterPosition, received_menuitems[adapterPosition])
+            }
+            itemView.changeSelectedMenubtn.setOnClickListener{
+                listener?.changeSelectedMenuClickListener(adapterPosition, received_menuitems[adapterPosition])
+            }
+        } //클릭리스너
+
+
     }
+
+
 
 
 

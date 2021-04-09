@@ -25,7 +25,6 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import kotlinx.android.synthetic.main.fragment_storeinfo.*
 import kotlinx.android.synthetic.main.fragment_storeinfo.recyclerView
-import kotlinx.android.synthetic.main.store_menu_item.*
 import kotlinx.android.synthetic.main.store_menu_item.view.*
 
 class storeInfoFragment : Fragment(), OnMapReadyCallback {
@@ -35,7 +34,7 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding : FragmentStoreinfoBinding
     var receivedItemdata : PlaceDocument? = null
 
-    //가져온 해당 가게의 메뉴 정보
+    //가져온 해당 가게의 메뉴 정보 & 선택한 메뉴 정보(장바구니에 담을 정보)
     private val menuviewmodel : StoreInfoViewmodel by viewModels()
 
     // 리사이클러뷰 정보
@@ -94,6 +93,9 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
 
         getFoodToMyCartbtn.setOnClickListener {
             val sendingbundlelist: ArrayList<StoreMenuItem> = resultSelectedMenuItem.clone() as ArrayList<StoreMenuItem> //얕은 복사 o (깊은 복사 x)
+
+            //Bundle이 필요가 없네...(방법 알아만 두기)
+            /*
             sendingbundlelist.removeIf { it.menucount ==0 }
             if (sendingbundlelist.isEmpty()){ Toast.makeText(context, "담긴 음식이 없습니다.", Toast.LENGTH_SHORT).show()  }
             else {
@@ -101,6 +103,18 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
                 bundle.putParcelableArrayList("selectedMenuItems", sendingbundlelist)
                 findNavController().navigate(R.id.action_storeInfoFragment_to_myCartFragment, bundle)   //넘겨받아서 가게의 메뉴 정보 가져오기.!
             }
+            */
+
+            sendingbundlelist.removeIf { it.menucount ==0 }
+            if (sendingbundlelist.isEmpty()){ Toast.makeText(context, "담긴 음식이 없습니다.", Toast.LENGTH_SHORT).show()  }
+            else {
+
+                sendingbundlelist.forEach {
+                    menuviewmodel.insertMenuInfoData(it)
+                }
+                findNavController().navigate(R.id.action_storeInfoFragment_to_myCartFragment)   //넘겨받아서 가게의 메뉴 정보 가져오기.!
+            }
+
         }
 
 
@@ -168,6 +182,7 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
             adapterStore = Menu_RecyclerViewAdapter(storeMenuItemList!!)
             recyclerView.adapter = adapterStore
 
+            Log.e("dddd", "${storeMenuItemList}")
             initRecyclerView_clickListener()    //클릭리스너
             storeMenuItemList.forEach { storeMenuItem ->  resultSelectedMenuItem.add(storeMenuItem)  } //클릭리스너 내부에서 아이템클릭여부(list) 사용위해 초기화 (한번)
         }

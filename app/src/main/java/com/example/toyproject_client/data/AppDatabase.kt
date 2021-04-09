@@ -16,7 +16,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
-@Database(entities = arrayOf(UserDataEntity::class, FavoriteStoreEntity::class, MenuInfoEntity::class), version = 3, exportSchema = false)
+@Database(entities = arrayOf(UserDataEntity::class, FavoriteStoreEntity::class, MenuInfoEntity::class), version = 4, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun UserDataDao(): UserDataDao
     abstract fun FavoriteStoreDao() : FavoriteStoreDao

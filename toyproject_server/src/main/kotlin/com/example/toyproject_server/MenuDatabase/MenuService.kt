@@ -13,15 +13,16 @@ class MenuService {
         this.menuRepository = menuRepository
     }
 
-    fun makeMenus(storelist_ids : MutableList<String>){
+    fun makeMenus(storelist_idnames :  HashMap<String, String>){
         val madeMenus = mapOf<String, Int>("사과" to 2000, "치킨" to 18000, "쉑쉑버거" to 5800,
         "로제파스타" to 8000, "밀크쉐이크" to 4300, "돼지국밥" to 5800)
-        storelist_ids.forEach { storeid ->
+        storelist_idnames.forEach { storeid, storename ->
             madeMenus.forEach { menuname, menuprice ->
                 val menu : Menu = Menu()
                 menu.storeid = storeid
                 menu.name = menuname
                 menu.price =menuprice
+                menu.storename = storename
                 menuRepository.save(menu)
             }
         }
@@ -38,6 +39,7 @@ class MenuService {
         storeMenuItem.storeid = menu.storeid
         storeMenuItem.menuname = menu.name
         storeMenuItem.menuprice = menu.price
+        storeMenuItem.storename = menu.storename
         return(storeMenuItem)
     }
 /*

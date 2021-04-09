@@ -52,8 +52,15 @@
         android:name="com.example.toyproject_client.MyCartFragment"
         android:label="MyCartFragment">
         <action
+            android:id="@+id/action_myCartFragment_to_changingMyCartMenuFragment"
+            app:destination="@id/changingMyCartMenuFragment" />
+        <action
             android:id="@+id/myCartFragment_pop"
             app:popUpTo="@id/homeFragment"  />
     </fragment>
+    <fragment
+        android:id="@+id/changingMyCartMenuFragment"
+        android:name="com.example.toyproject_client.ChangingMyCartMenuFragment"
+        android:label="ChangingMyCartMenuFragment" />
 
 </navigation>

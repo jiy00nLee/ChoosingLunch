@@ -24,7 +24,7 @@
                 android:layout_marginRight="12dp"
                 android:checked="false" />
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginLeft="10dp"
@@ -36,43 +36,44 @@
                     android:text="가게이름"
                     android:textSize="18dp"
                     android:layout_marginBottom="5dp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:ellipsize="end"/>
                 <TextView
-                    android:id="@+id/selected_menues"
+                    android:id="@+id/selectedMenues"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="메뉴이름(2)\n메뉴이름2(3)"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:ellipsize="end"/>
             </LinearLayout>
-            <Button
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text = "변경/추가"
-                android:textSize="13dp"
-                android:layout_gravity="bottom"
-                android:textColor="@color/gray"
-                android:background="@drawable/btn_custom"
-                android:minWidth="0dp"
-                android:minHeight="0dp" />
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/changeSelectedMenubtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text = "수정"
+                    android:textSize="13dp"
+                    android:layout_gravity="bottom"
+                    android:textColor="@color/gray"
+                    android:background="@drawable/btn_custom"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp" />
+            </LinearLayout>
             <View
                 android:layout_width="3dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:background="@color/gray" />
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center">
-                <TextView
-                    android:id="@+id/menuPrice"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="12dp"
-                    android:text="메뉴가격"
-                    android:textSize="15dp"  />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/totalMenuPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:text="메뉴가격"
+                android:textSize="15dp"  />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </layout>

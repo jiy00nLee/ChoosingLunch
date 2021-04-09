@@ -17,5 +17,8 @@ data class MenuInfoEntity (
     val menuprice : Int = 0,
 
     @ColumnInfo(name= "Menucount")
-    val menucount : Int = 0
+    val menucount : Int = 0,
+
+    @ColumnInfo(name = "Storename")
+    val storename: String = ""
 )
