@@ -26,6 +26,9 @@ class StoreInfoViewmodel (application: Application) : AndroidViewModel(applicati
     fun insertMenuInfoData(menuinfo : StoreMenuItem) = viewModelScope.launch(Dispatchers.IO) {
         menuInfoRepository.insertMenuInfoData(menuinfo)
     }
+    fun deleteMenuInfoListByStore(storeID: String) = viewModelScope.launch(Dispatchers.IO){
+        menuInfoRepository.deleteMenuInfoListByStore(storeID)
+    }
 
     fun getAllStoreIDsFromMycart() : LiveData<List<String>> {
         return menuInfoRepository.getAllStoreIDsFromMycart()

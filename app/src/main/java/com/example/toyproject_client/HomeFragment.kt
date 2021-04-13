@@ -25,6 +25,7 @@ class HomeFragment : Fragment() {
 
     private var userLat: Double = 0.0
     private var userLng: Double = 0.0
+    private var i : Int = 0
 
     //private var near: LatLng? = null //좌표인듯.
     //private lateinit var select_mode  -> 클릭여부에 따른 모드 변경 추가하기.
@@ -38,12 +39,17 @@ class HomeFragment : Fragment() {
 
         //(가입시) 이미 정보가 있다는 가정하이다.
         viewModel.getUserLocationData().observe(viewLifecycleOwner) {
-                useraddress = it.address
+                useraddress = ""
                 userLat = it.latitude
                 userLng = it.longtitude
 
-                useraddresslist = useraddress.split(" ") as MutableList<String>
-                useraddress = useraddresslist[2] + " " +  useraddresslist[3] + " " +  useraddresslist[4]  //아 마 주소 형식 같을듯
+                useraddresslist = it.address.split(" ") as MutableList<String>
+
+                useraddresslist.removeAt(0)
+                useraddresslist.removeAt(0)
+                while (useraddresslist.isNotEmpty()){
+                    useraddress += useraddresslist[i] + " "
+                    useraddresslist.removeAt(0)      }
                 userlocation.text = useraddress //주소같은 경우 xml로 표현해주기.
         }
 

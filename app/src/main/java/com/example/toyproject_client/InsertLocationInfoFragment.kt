@@ -42,14 +42,15 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
     }
 
     //주소 변환용 변수들.
+    lateinit var geoCoder : Geocoder
     private var nowLat : Double = 35.157662
     private var nowLng : Double = 129.059111
-    private var addresslist: List<Address>? = null
+    private lateinit var addresslist: MutableList<Address>
     private var address : String? = null
 
     //사용자 관련 변수들.
     private lateinit var username : String
-    private lateinit var userlocation : String
+    private lateinit var exaddress : String
 
 
     override fun onCreateView(
@@ -62,11 +63,11 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
         //(가입시) 이미 정보가 있다는 가정하이다.
         viewModel.getUserLocationData().observe(viewLifecycleOwner){
             username = it.username
-            userlocation = it.address
-            address = userlocation
+            exaddress= it.address
             userName.text = username
-            userLocation.text = userlocation
         }
+
+        geoCoder = Geocoder(context, Locale.getDefault())
 
         return rootView
     }
@@ -114,7 +115,6 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(naverMap: NaverMap) {   //이게 oncreated같은 개념 맞나? -> 그래서 여기 버튼 onclick 넣음
 
-        this.naverMap = naverMap
         naverMap!!.locationSource = locationSource // 초기 위치 설정(주의:locationSource!= latitude)
         naverMap!!.locationTrackingMode = LocationTrackingMode.Follow     //권한 허용시(카메라 따라가게 모드 설정 o)
         this.naverMap = naverMap
@@ -122,15 +122,23 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
         requestPermissions(PERMISSIONS,LOCATION_PERMISSION_REQUEST_CODE  )
         Toast.makeText(context, "사용자 위치를 찾고 있는 중입니다.", Toast.LENGTH_SHORT).show()
 
+        if (address != exaddress){  //저장되어있는 주소와 현재 위치주소가 다른 경우
+            findNavController().navigate(R.id.action_insertLocationInfoFragment_to_askChangeLocationDialogFragment)
+
+        }
+
         //현재위치 찾아주는 버튼이다.
         finduserslocation_btn.setOnClickListener{
             findUsersLocation(naverMap)
+            userLocation.text = address
         }
 
         //사용자의 위치가 변경될 경우 호출되는 콜백 메서드
         naverMap.addOnLocationChangeListener { location ->
             nowLat = location.latitude
             nowLng = location.longitude
+            findLocationAddress()
+
         }
     }
 
@@ -168,14 +176,12 @@ class InsertLocationInfoFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun findLocationAddress(){
-        val geoCoder = Geocoder(context, Locale.getDefault())
         addresslist =  geoCoder.getFromLocation(nowLat, nowLng, 1) //위도,경도 -> 주소로 변환
-        address = addresslist!!.get(0).getAddressLine(0)
-        // Toast.makeText(context, "위치 :  "+ "${addresslist}", Toast.LENGTH_SHORT).show()
-
+        if (addresslist.isNotEmpty()){
+            address = addresslist.get(0).getAddressLine(0)
+            userLocation.text = address
+        }
     }
-
-
 
 
 

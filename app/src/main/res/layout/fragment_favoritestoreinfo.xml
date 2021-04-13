@@ -37,6 +37,7 @@
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:background="#00FF0000"
+            android:visibility="gone"
             android:text="선택" />
         <Button
             android:id="@+id/deletestore_btn"
@@ -47,6 +48,7 @@
             android:minWidth="0dp"
             android:minHeight="0dp"
             android:background="#00FF0000"
+            android:visibility="gone"
             android:text="삭제" />
     </LinearLayout>
     <LinearLayout

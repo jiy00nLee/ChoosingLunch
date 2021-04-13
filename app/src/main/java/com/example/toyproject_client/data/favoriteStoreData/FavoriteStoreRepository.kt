@@ -30,8 +30,8 @@ class FavoriteStoreRepository(appdatabase: AppDatabase){
         favoriteStoreDao.deleteFavoriteStoreInfo(mappingPlaceDocumentToFavoriteStoreEntity(receivedStoredata))
     }
 
-    fun getAllFavoriteStores() : LiveData<List<PlaceDocument>?>{
-        val userlocationitemdataLiveData = Transformations.map(favoriteStoreDao.getAllFavoriteStores()){ entitylist -> entitylist?.map{ entity ->
+    fun getAllFavoriteStores() : LiveData<List<PlaceDocument>>{
+        val userlocationitemdataLiveData = Transformations.map(favoriteStoreDao.getAllFavoriteStores()){ entitylist -> entitylist.map{ entity ->
             mappingFavoriteStireEntityToPlaceDocument(entity)
              }
         }

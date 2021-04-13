@@ -9,9 +9,14 @@ import com.example.toyproject_client.myserver.PlaceDocument
 import kotlinx.android.synthetic.main.store_item.view.*
 import kotlinx.android.synthetic.main.store_menu_item.view.*
 
-class Store_RecyclerViewAdapter(val received_items : List<PlaceDocument>, val itemClick : (PlaceDocument) ->Unit) : RecyclerView.Adapter<Store_RecyclerViewAdapter.SearchViewHolder>() {
+class Store_RecyclerViewAdapter(val itemClick : (PlaceDocument) ->Unit) : RecyclerView.Adapter<Store_RecyclerViewAdapter.SearchViewHolder>() {
 
     //private lateinit var binding : StoreItemBinding
+    var received_items : List<PlaceDocument> = listOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun getItemCount(): Int {
         return received_items.size
@@ -36,9 +41,7 @@ class Store_RecyclerViewAdapter(val received_items : List<PlaceDocument>, val it
             itemView.storeCategoryname.text = data.category_name
             itemView.storePlacelocation.text = data.road_address_name
 
-            itemView.setOnClickListener {
-             itemClick(data)
-            }
+            itemView.setOnClickListener {  itemClick(data)  }
         }
     }
 

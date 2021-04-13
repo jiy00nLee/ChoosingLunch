@@ -2,15 +2,13 @@ package com.example.toyproject_client
 
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.toyproject_client.data.StoreMenuItem
-import com.example.toyproject_client.myserver.PlaceDocument
-import kotlinx.android.synthetic.main.store_menu_item.view.*
+import kotlinx.android.synthetic.main.changing_store_menu_item.view.*
 
 
-class Menu_RecyclerViewAdapter() : RecyclerView.Adapter<Menu_RecyclerViewAdapter.SearchViewHolder>() {
+class ChangingMenu_RecyclerViewAdapter() : RecyclerView.Adapter<ChangingMenu_RecyclerViewAdapter.SearchViewHolder>() {
     //클릭리스너 인터페이스 넘겨주기
     var listener : MenuItemClickListener ?= null
 
@@ -42,13 +40,21 @@ class Menu_RecyclerViewAdapter() : RecyclerView.Adapter<Menu_RecyclerViewAdapter
 
     //binding : StoreMenuItemBinding , binding.root 대신
     inner class SearchViewHolder (parent: ViewGroup) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.store_menu_item, parent, false)) //(커스텀) 뷰 홀더 -> '하나짜리 담당'! 생성할 '뷰'만 구성. (no clickinterface)
+            LayoutInflater.from(parent.context).inflate(R.layout.changing_store_menu_item, parent, false)) //(커스텀) 뷰 홀더 -> '하나짜리 담당'! 생성할 '뷰'만 구성. (no clickinterface)
     {
         fun bind (data: StoreMenuItem){
             // binding.storeMenuItems = data
             val price = data.menuprice.toString() + "원"
             itemView.menuName.text = data.menuname
             itemView.menuPrice.text = price
+
+            //뷰 생성시에만 해당됨. (따라서 클릭여부에 따라 변하는 건 리스너로 바꾸어 주어야 함.)
+            itemView.menuItemSelectbtn.isChecked = data.ischecked
+            if (data.ischecked) {
+                itemView.Countinglayout.visibility = View.VISIBLE
+                itemView.Countingtext.text = data.menucount.toString() + " 개"
+            }
+            else itemView.Countinglayout.visibility = View.GONE
         }
 
 

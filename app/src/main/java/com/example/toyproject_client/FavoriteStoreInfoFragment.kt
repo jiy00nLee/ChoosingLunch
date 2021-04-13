@@ -29,20 +29,23 @@ class FavoriteStoreInfoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel.getAllFavoriteStores().observe(viewLifecycleOwner){ favoritestorelist ->
-            showRecyclerView(favoritestorelist)
-        }
+        showRecyclerView()
     }
 
-    private fun showRecyclerView(favoritestorelist: List<PlaceDocument>?) {
-
-        adapterFavoriteStore = Store_RecyclerViewAdapter(favoritestorelist!!) { placeDocument ->
+    private fun showRecyclerView() {
+        adapterFavoriteStore = Store_RecyclerViewAdapter() { placeDocument ->
             val bundle = Bundle()
-            bundle?.putParcelable("selectedStore", placeDocument)
-            findNavController().navigate(R.id.action_favoriteStoreInfoFragment_to_storeInfoFragment, bundle )
-        }//.apply { rc_storeItems = resultplaces!! }
-        recyclerView.adapter = adapterFavoriteStore
+            bundle.putParcelable("selectedStore", placeDocument)
+            findNavController().navigate(
+                    R.id.action_homeFragment_to_storeInfoFragment,
+                    bundle
+            )
+        }.apply {
+            viewModel.getAllFavoriteStores().observe(viewLifecycleOwner){ observedfavoritestorelist ->
+                received_items = observedfavoritestorelist
+            }
+        }
+        recyclerView.adapter =  adapterFavoriteStore
     }
 
 

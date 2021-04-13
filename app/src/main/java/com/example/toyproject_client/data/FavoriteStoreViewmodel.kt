@@ -30,7 +30,7 @@ class FavoriteStoreViewmodel (application: Application) : AndroidViewModel(appli
         return favoriteStoreRepository.checkFavoriteStore(storeID)
     }
 
-    fun getAllFavoriteStores() : LiveData<List<PlaceDocument>?> {
+    fun getAllFavoriteStores() : LiveData<List<PlaceDocument>> {
         return favoriteStoreRepository.getAllFavoriteStores()
     }
 

@@ -12,9 +12,15 @@ import kotlinx.android.synthetic.main.mycart_item.view.menuItemSelectbtn
 import kotlinx.android.synthetic.main.store_menu_item.view.*
 
 
-class SelectedMenu_RecyclerViewAdapter(val received_menuitems : MutableList<CartMenuItem>) : RecyclerView.Adapter<SelectedMenu_RecyclerViewAdapter.SearchViewHolder>() {
+class SelectedMenu_RecyclerViewAdapter() : RecyclerView.Adapter<SelectedMenu_RecyclerViewAdapter.SearchViewHolder>() {
     //클릭리스너 인터페이스 넘겨주기
     var listener : MenuItemClickListener ?= null
+
+    var received_menuitems : List<CartMenuItem> = listOf()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     interface MenuItemClickListener {
         fun menuItemCheckClickListener(position: Int, item: CartMenuItem)

@@ -27,6 +27,9 @@ class NenuInfoRepository(appdatabase: AppDatabase) {
     fun insertMenuInfoData(menuinfo : StoreMenuItem) {
         menuinfoDao.insertMenuInfoData(mappingStoreMenuItemTMenuInfoEntity(menuinfo))
     }
+    fun deleteMenuInfoListByStore(storeID: String){
+        menuinfoDao.deleteMenuListByStore(storeID)
+    }
 
     fun getAllStoreIDsFromMycart() : LiveData<List<String>> {
         return menuinfoDao.getAllStoreIDsFromMycart()

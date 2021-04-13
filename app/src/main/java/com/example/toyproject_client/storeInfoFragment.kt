@@ -32,7 +32,7 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
     //가져온 해당 가게 정보
     private val storeviewModel: FavoriteStoreViewmodel by viewModels()
     private lateinit var binding : FragmentStoreinfoBinding
-    var receivedItemdata : PlaceDocument? = null
+    private var receivedItemdata : PlaceDocument? = null
 
     //가져온 해당 가게의 메뉴 정보 & 선택한 메뉴 정보(장바구니에 담을 정보)
     private val menuviewmodel : StoreInfoViewmodel by viewModels()
@@ -85,7 +85,6 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
 
         like_btn.setOnClickListener {
             clickstate = (!clickstate)
-            Log.d("BTN", "${clickstate}")
             changeButtonImage(clickstate)
             controlFavoriteStore(clickstate)
         }
@@ -108,10 +107,9 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
             sendingbundlelist.removeIf { it.menucount ==0 }
             if (sendingbundlelist.isEmpty()){ Toast.makeText(context, "담긴 음식이 없습니다.", Toast.LENGTH_SHORT).show()  }
             else {
-
-                sendingbundlelist.forEach {
-                    menuviewmodel.insertMenuInfoData(it)
-                }
+                    sendingbundlelist.forEach {
+                        menuviewmodel.insertMenuInfoData(it)
+                    }
                 findNavController().navigate(R.id.action_storeInfoFragment_to_myCartFragment)   //넘겨받아서 가게의 메뉴 정보 가져오기.!
             }
 
@@ -177,15 +175,30 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
     private fun makeView(storeID : String){
         binding.storeItem = receivedItemdata
 
-        //해당 가게의 음식들을 가져와야 한다. (메뉴 표현)
-        menuviewmodel.getStoreMenuList(storeID).observe(viewLifecycleOwner){ storeMenuItemList ->
-            adapterStore = Menu_RecyclerViewAdapter(storeMenuItemList!!)
-            recyclerView.adapter = adapterStore
+        this.storeID = receivedItemdata!!.id    //Delay때문에 observe직전에 한번 더 체킹필요함.
 
-            Log.e("dddd", "${storeMenuItemList}")
-            initRecyclerView_clickListener()    //클릭리스너
-            storeMenuItemList.forEach { storeMenuItem ->  resultSelectedMenuItem.add(storeMenuItem)  } //클릭리스너 내부에서 아이템클릭여부(list) 사용위해 초기화 (한번)
+        menuviewmodel.getMenuInfoListByStore(storeID).observe(viewLifecycleOwner){ storemenulist ->
+            //이전에 해당가게의 장바구니 담은 목록이 있을 경우
+            if (storemenulist.isNotEmpty()) {
+                val dialogbundle = Bundle()
+                dialogbundle.putString("StoreID", storeID)
+                findNavController().navigate(R.id.action_storeInfoFragment_to_askDeleteDialogFragment, dialogbundle)
+
+                //val askDialog = askDeleteDialogFragment()
+                //askDialog.show(childFragmentManager, "askDialog")
+            }
         }
+
+        adapterStore = Menu_RecyclerViewAdapter().apply {
+            menuviewmodel.getStoreMenuList(storeID).observe(viewLifecycleOwner) { storeMenuItemList ->
+                received_menuitems = storeMenuItemList
+                resultSelectedMenuItem.clear()
+                resultSelectedMenuItem.addAll(storeMenuItemList)
+                //storeMenuItemList.forEach { storeMenuItem ->  resultSelectedMenuItem.add(storeMenuItem)}
+            }
+        }
+            recyclerView.adapter = adapterStore
+            initRecyclerView_clickListener()    //클릭리스너
     }
     //-------------------------------------------------------------------------------------------------------------------------------------------------메뉴클릭 관련 함수들------------------------------
 
@@ -231,9 +244,7 @@ class storeInfoFragment : Fragment(), OnMapReadyCallback {
             2 -> { item.menucount += 1
                 viewHolder.itemView.Countingtext.text = item.menucount.toString() + " 개" }
         }
-        Log.e("TAG!! before resultSelectedMenuItem", "${resultSelectedMenuItem}")
             resultSelectedMenuItem.set(position, item)
-        Log.e("TAG!! after resultSelectedMenuItem", "${resultSelectedMenuItem}")
 
     }
 

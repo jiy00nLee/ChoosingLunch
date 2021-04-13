@@ -17,10 +17,11 @@
         <action
             android:id="@+id/action_homeFragment_to_favoriteStoreInfoFragment"
             app:destination="@id/favoriteStoreInfoFragment"
-            app:enterAnim="@anim/fragment_open_enter" />
+            app:enterAnim="@anim/fragment_open_enter"  />
         <action
             android:id="@+id/action_homeFragment_to_myCartFragment"
-            app:destination="@id/myCartFragment" />
+            app:destination="@id/myCartFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
         android:id="@+id/insertLocationInfoFragment"
@@ -30,13 +31,20 @@
         <action
             android:id="@+id/action_insertLocationInfoFragment_to_homeFragment"
             app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_insertLocationInfoFragment_to_askChangeLocationDialogFragment"
+            app:destination="@id/askChangeLocationDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/storeInfoFragment"
         android:name="com.example.toyproject_client.storeInfoFragment"
         android:label="storeInfoFragment" >
         <action
+            android:id="@+id/action_storeInfoFragment_to_askDeleteDialogFragment"
+            app:destination="@id/askDeleteDialogFragment" />
+        <action
             android:id="@+id/action_storeInfoFragment_to_myCartFragment"
+            app:enterAnim="@anim/fragment_open_enter"
             app:destination="@id/myCartFragment" />
     </fragment>
     <fragment
@@ -53,14 +61,46 @@
         android:label="MyCartFragment">
         <action
             android:id="@+id/action_myCartFragment_to_changingMyCartMenuFragment"
+            app:enterAnim="@anim/fragment_open_enter"
             app:destination="@id/changingMyCartMenuFragment" />
         <action
-            android:id="@+id/myCartFragment_pop"
-            app:popUpTo="@id/homeFragment"  />
+            android:id="@+id/action_myCartFragment_to_homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
     <fragment
         android:id="@+id/changingMyCartMenuFragment"
         android:name="com.example.toyproject_client.ChangingMyCartMenuFragment"
-        android:label="ChangingMyCartMenuFragment" />
+        android:label="ChangingMyCartMenuFragment" >
+        <action
+            android:id="@+id/action_changingMyCartMenuFragment_to_myCartFragment"
+            app:popUpTo="@id/myCartFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
+    <dialog
+        android:id="@+id/askDeleteDialogFragment"
+        android:name="com.example.toyproject_client.askDeleteDialogFragment"
+        android:label="askDeleteDialogFragment" >
+        <action
+            android:id="@+id/action_askDeleteDialogFragment_to_storeInfoFragment"
+            app:popUpTo="@id/storeInfoFragment" />
+        <action
+            android:id="@+id/action_askDeleteDialogFragment_to_myCartFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:destination="@id/myCartFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/askChangeLocationDialogFragment"
+        android:name="com.example.toyproject_client.askChangeLocationDialogFragment"
+        android:label="askChangeLocationDialogFragment" >
+        <action
+            android:id="@+id/action_askChangeLocationDialogFragment_to_homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
+        <action
+            android:id="@+id/action_askChangeLocationDialogFragment_to_insertLocationInfoFragment"
+            app:popUpTo="@id/insertLocationInfoFragment"
+            app:popUpToInclusive="false"/>
+    </dialog>
 
 </navigation>

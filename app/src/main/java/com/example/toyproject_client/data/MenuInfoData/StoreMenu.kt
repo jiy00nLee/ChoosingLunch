@@ -9,5 +9,6 @@ data class StoreMenuItem (
         val menuname : String = "",
         val menuprice : Int = 0,
         var menucount : Int = 0,
-        val storename : String = ""
+        val storename : String = "",
+        var ischecked : Boolean = false
 ) : Parcelable

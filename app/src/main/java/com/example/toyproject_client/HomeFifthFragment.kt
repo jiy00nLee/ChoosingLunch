@@ -12,6 +12,7 @@ import com.example.toyproject_client.myserver.PlaceDocument
 import com.example.toyproject_client.data.UserDataViewmodel
 import kotlinx.android.synthetic.main.fragment_fifthhome.*
 import kotlinx.android.synthetic.main.fragment_fifthhome.recyclerView
+import kotlinx.android.synthetic.main.fragment_firsthome.*
 import kotlinx.android.synthetic.main.fragment_fourthhome.*
 
 class HomeFifthFragment : Fragment() {
@@ -31,29 +32,28 @@ class HomeFifthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getUserLocationData().observe(viewLifecycleOwner) {
-            userLat = it.latitude
-            userLng = it.longtitude
-            useraddress = it.address
-            viewModel.getStoreList("양식", userLng, userLat, useraddress).observe(viewLifecycleOwner){resultStorelist ->
-                showRecyclerView(resultStorelist)
-            }
-        }
+        showRecyclerView()
     }
 
-    private fun showRecyclerView(storelist: List<PlaceDocument>?) {
-
-        if (storelist != null) {
-            adapterStore = Store_RecyclerViewAdapter(storelist!!) { placeDocument ->
-                val bundle = Bundle()
-                bundle?.putParcelable("selectedStore", placeDocument)
-                findNavController().navigate(
+    private fun showRecyclerView() {
+        adapterStore = Store_RecyclerViewAdapter() { placeDocument ->
+            val bundle = Bundle()
+            bundle.putParcelable("selectedStore", placeDocument)
+            findNavController().navigate(
                     R.id.action_homeFragment_to_storeInfoFragment,
                     bundle
-                )
-            }//.apply { rc_storeItems = resultplaces!! }
-            recyclerView.adapter = adapterStore
+            )
+        }.apply {
+            viewModel.getUserLocationData().observe(viewLifecycleOwner) {
+                userLat = it.latitude
+                userLng = it.longtitude
+                useraddress = it.address
+                viewModel.getStoreList("양식", userLng, userLat, useraddress).observe(viewLifecycleOwner){observedresultStorelist ->
+                    received_items = observedresultStorelist
+                }
+            }
         }
+        recyclerView.adapter = adapterStore
     }
 
 

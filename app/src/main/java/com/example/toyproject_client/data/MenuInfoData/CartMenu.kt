@@ -7,5 +7,7 @@ data class CartMenuItem (       //단순 뷰 표출용 데이터 클래스
         val storename : String = "",
         val menuinfotext : String = "",
         val totalmenuprice : Int = 0,
-        val storeid : String = ""
+        val storeid : String = "",
+        val menupriceinfotext : String = "",
+        var clickedstate : Boolean = false
 )
