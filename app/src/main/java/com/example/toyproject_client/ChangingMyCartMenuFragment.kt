@@ -1,20 +1,21 @@
 package com.example.toyproject_client
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.toyproject_client.data.FavoriteStoreViewmodel
+import com.example.toyproject_client.View_Adapter.ChangingMenu_RecyclerViewAdapter
 import com.example.toyproject_client.data.StoreInfoViewmodel
 import com.example.toyproject_client.data.StoreMenuItem
 import kotlinx.android.synthetic.main.changing_store_menu_item.view.*
 import kotlinx.android.synthetic.main.fragment_changingmycartmenu.*
 import kotlinx.android.synthetic.main.fragment_changingmycartmenu.recyclerView
+import java.text.DecimalFormat
 
 
 class ChangingMyCartMenuFragment : DialogFragment() {
@@ -36,6 +37,14 @@ class ChangingMyCartMenuFragment : DialogFragment() {
         return rootView
     }
 
+    override fun onResume() {
+        super.onResume()
+        val params : ViewGroup.LayoutParams = dialog?.window?.attributes!!
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT
+        dialog?.window?.attributes= params as WindowManager.LayoutParams
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         storeID = arguments?.getString("storeID")!!
@@ -49,12 +58,13 @@ class ChangingMyCartMenuFragment : DialogFragment() {
         }
 
         dialogChangebtn.setOnClickListener {
-            Log.e("checking!!", "${resultStoreMenuItem}")
+
             val sendingbundlelist: ArrayList<StoreMenuItem> = resultStoreMenuItem.clone() as ArrayList<StoreMenuItem> //얕은 복사 o (깊은 복사 x)
-            Log.e("checking!!!", "${sendingbundlelist}")
             sendingbundlelist.removeIf { !it.ischecked || it.menucount == 0}
-            Log.e("checking!!!!", "${sendingbundlelist}")
-            if (sendingbundlelist.isEmpty()){ Toast.makeText(context, "담긴 음식이 없습니다.", Toast.LENGTH_SHORT).show()  }     //이거에서 담으신 걸 다 없애시겠스비까!!!!!!!
+            if (sendingbundlelist.isEmpty()){
+                val dialogbundle = Bundle()
+                dialogbundle.putString("StoreID", storeID)
+                findNavController().navigate(R.id.action_changingMyCartMenuFragment_to_askChangingDeleteDialogFragment, dialogbundle)   }
             else {
                 menuviewmodel.deleteMenuInfoListByStore(storeID)   //이전 저장 정보 지움.
                 sendingbundlelist.forEach {
@@ -74,6 +84,10 @@ class ChangingMyCartMenuFragment : DialogFragment() {
         adapterStore = ChangingMenu_RecyclerViewAdapter().apply {
             menuviewmodel.getMenuInfoListByStore(storeID).observe(viewLifecycleOwner) { storeMenuItemList ->
 
+                var totalmenuprice : Int = 0
+                val decform : DecimalFormat = DecimalFormat("#,###")
+                var totalmenupricetext : String =""
+
                 storeMenuItemList.forEach { selecteditem ->
                     resultStoreMenuItem.forEach {
                         if (it.menuname== selecteditem.menuname) {
@@ -81,13 +95,17 @@ class ChangingMyCartMenuFragment : DialogFragment() {
                             it.menucount = selecteditem.menucount }
                             //이거 체킹하기.
                     }
+                    //totalmenuprice +=  selecteditem.menuprice*selecteditem.menucount
                 }
-                Log.e("checking!", "${resultStoreMenuItem}")
                 received_menuitems = resultStoreMenuItem
+                //totalmenupricetext = "변경하기 ("+ decform.format(totalmenuprice).toString() + "원)"
+                //dialogChangebtn.text = totalmenupricetext
             }
         }
         recyclerView.adapter = adapterStore
         initRecyclerView_clickListener()    //클릭리스너
+
+
     }
 
 
@@ -133,7 +151,6 @@ class ChangingMyCartMenuFragment : DialogFragment() {
             2 -> { item.menucount += 1
                 viewHolder.itemView.Countingtext.text = item.menucount.toString() + " 개" }
         }
-        Log.e("checking2222", "${resultStoreMenuItem}")
         //resultSelectedMenuItem.set(position, item)
 
     }

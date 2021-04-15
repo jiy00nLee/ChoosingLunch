@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="20dp"
+    android:gravity="center"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/alarm_dialog_title"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="알림"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:background="#f2f2f2"
+        android:textColor="@color/black" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray"
+        android:gravity="center"
+        android:padding="15dp"
+        android:layout_margin="5dp"
+        android:textSize="15dp"
+        android:text="선택된 메뉴가 없습니다. \n이대로 변경하시겠습니까?" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/dialogYesbtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textSize="15dp"
+            android:background="@color/gray"
+            android:textColor="@color/white"
+            android:text="확인" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="#808080" />
+
+        <TextView
+            android:id="@+id/dialogNobtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="취소"
+            android:textSize="15dp"
+            android:textColor="@color/gray" />
+    </LinearLayout>
+</LinearLayout>

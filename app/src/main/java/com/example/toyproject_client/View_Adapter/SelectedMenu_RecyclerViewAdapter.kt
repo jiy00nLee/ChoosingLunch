@@ -1,20 +1,17 @@
-package com.example.toyproject_client
+package com.example.toyproject_client.View_Adapter
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.toyproject_client.R
 import com.example.toyproject_client.data.MenuInfoData.CartMenuItem
-import com.example.toyproject_client.data.StoreMenuItem
 import kotlinx.android.synthetic.main.mycart_item.view.*
 import kotlinx.android.synthetic.main.mycart_item.view.menuItemSelectbtn
-import kotlinx.android.synthetic.main.store_menu_item.view.*
 
 
 class SelectedMenu_RecyclerViewAdapter() : RecyclerView.Adapter<SelectedMenu_RecyclerViewAdapter.SearchViewHolder>() {
     //클릭리스너 인터페이스 넘겨주기
-    var listener : MenuItemClickListener ?= null
+    var listener : MenuItemClickListener?= null
 
     var received_menuitems : List<CartMenuItem> = listOf()
         set(value) {

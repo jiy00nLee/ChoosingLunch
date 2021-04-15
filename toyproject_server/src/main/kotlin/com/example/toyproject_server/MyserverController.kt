@@ -2,14 +2,15 @@ package com.example.toyproject_server
 
 import com.example.toyproject_server.MenuDatabase.StoreMenuItem
 import com.example.toyproject_server.MenuDatabase.MenuService
+import com.example.toyproject_server.PayDatabase.PayInfoItem
+import com.example.toyproject_server.PayDatabase.PayService
 import com.example.toyproject_server.PlaceDatabase.PlaceService
 import com.example.toyproject_server.RequiredQueryDatabase.QueryData
 import com.example.toyproject_server.RequiredQueryDatabase.QueryService
 import com.example.toyproject_server.RestAPI.PlaceDocument
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import retrofit2.http.Body
 
 
 @RestController
@@ -23,6 +24,9 @@ class MyserverController {
 
     @Autowired
     private lateinit var placeService: PlaceService
+
+    @Autowired
+    private lateinit var payService : PayService
 
 
     @GetMapping("/myServerKakao") //카카오 api로 지도 받아오는 서버.
@@ -103,6 +107,16 @@ class MyserverController {
             val foundmenulist: List<StoreMenuItem>? = menuService.findStoreID(storeID)
             return foundmenulist
         }
+
+        @PostMapping("/insertmyServerpaymentDatabase")
+        fun putPaymentDB(@RequestBody body: PayInfoItem) {
+            payService.insertpayInfo(body)
+        }
+
+        //@PostMapping("/deletemyServerpaymentDatabase")
+
+
+
 
 }
 

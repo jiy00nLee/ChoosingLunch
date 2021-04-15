@@ -1,7 +1,6 @@
-package com.example.toyproject_client
+package com.example.toyproject_client.View_Dialog
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.toyproject_client.R
 import com.example.toyproject_client.data.StoreInfoViewmodel
 import kotlinx.android.synthetic.main.fragment_askdeletedialog.view.*
 

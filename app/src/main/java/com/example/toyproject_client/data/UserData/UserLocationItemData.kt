@@ -3,7 +3,7 @@ package com.example.toyproject_client.data.UserData
 
 //@Parcelize
 data class UserLocationItemData (
-    val username : String,
+    val username : String = "이지윤",
     val address : String,
     val longtitude : Double,
     val latitude : Double,

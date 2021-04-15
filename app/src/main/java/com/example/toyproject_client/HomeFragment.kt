@@ -10,13 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.example.toyproject_client.View_Adapter.ViewPagerAdapter
+import com.example.toyproject_client.data.PaymentViewmodel
 import com.example.toyproject_client.data.UserDataViewmodel
 
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.userlocation
 
 class HomeFragment : Fragment() {
-    private val viewModel: UserDataViewmodel by viewModels()
+    private val userviewModel: UserDataViewmodel by viewModels()
+    private val payviewModel : PaymentViewmodel by viewModels()
     private lateinit var viewPagerAdapter: ViewPagerAdapter
 
     //사용자 정보 변수들.
@@ -38,7 +41,7 @@ class HomeFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
         //(가입시) 이미 정보가 있다는 가정하이다.
-        viewModel.getUserLocationData().observe(viewLifecycleOwner) {
+        userviewModel.getUserLocationData().observe(viewLifecycleOwner) {
                 useraddress = ""
                 userLat = it.latitude
                 userLng = it.longtitude
@@ -72,6 +75,16 @@ class HomeFragment : Fragment() {
         mycart_btn.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_myCartFragment)
         }
+
+        payviewModel.getPayInfoData().observe(viewLifecycleOwner){
+            if (it == null) payfragbtn.visibility = View.GONE
+            else payfragbtn.visibility = View.VISIBLE
+        }
+
+        payfragbtn.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_payHistoryFragment)
+        }
+
     }
 
 

@@ -1,13 +1,11 @@
-package com.example.toyproject_client
+package com.example.toyproject_client.View_Adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.toyproject_client.databinding.StoreItemBinding
+import com.example.toyproject_client.R
 import com.example.toyproject_client.myserver.PlaceDocument
 import kotlinx.android.synthetic.main.store_item.view.*
-import kotlinx.android.synthetic.main.store_menu_item.view.*
 
 class Store_RecyclerViewAdapter(val itemClick : (PlaceDocument) ->Unit) : RecyclerView.Adapter<Store_RecyclerViewAdapter.SearchViewHolder>() {
 

@@ -11,6 +11,7 @@ import retrofit2.Response
 
 class MyserverRepository {
     private val myserverAPI = Myserver.create() //서버 생성
+    //private val call : okhttp3.Call = okhttp3.Call ->얘는 하나로 활용할 수 없나???
 
     companion object{
         private var sInstance: MyserverRepository? = null
@@ -60,7 +61,6 @@ class MyserverRepository {
         call.enqueue(object : Callback<List<StoreMenuItem>> {
             //통신 성공
             override fun onResponse(call: Call<List<StoreMenuItem>>, response: Response<List<StoreMenuItem>>) {
-
                 livedata_resultplacemenus.value = response.body()
             }
             //통신 실패
@@ -71,6 +71,17 @@ class MyserverRepository {
         })
     }
 
+    fun putPayInfoData(payInfoItem: PayInfoItem){
+        val call = myserverAPI.InsertbuyStoreMenuInfoToMyserverDatabase(payInfoItem)
+        call.enqueue(object : Callback<PayInfoItem>{
+            override fun onResponse(call: Call<PayInfoItem>, response: Response<PayInfoItem>) {
+                Log.d(ContentValues.TAG,"SUCCESS")
+            }
+            override fun onFailure(call: Call<PayInfoItem>, t: Throwable) {
+                Log.e(ContentValues.TAG,"FAIL")
+            }
+        })
+    }
 
 
 }

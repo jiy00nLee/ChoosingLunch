@@ -2,6 +2,9 @@ package com.example.toyproject_server
 
 import com.example.toyproject_server.MenuDatabase.MenuRepository
 import com.example.toyproject_server.MenuDatabase.MenuService
+import com.example.toyproject_server.PayDatabase.PayDetailRepository
+import com.example.toyproject_server.PayDatabase.PayRepository
+import com.example.toyproject_server.PayDatabase.PayService
 import com.example.toyproject_server.PlaceDatabase.PlaceService
 import com.example.toyproject_server.PlaceDatabase.PlaceRepository
 import com.example.toyproject_server.RequiredQueryDatabase.QueryRepository
@@ -36,6 +39,19 @@ class Configuration {
     @Bean
     fun placeService() : PlaceService {    //'PlaceService' 타입의 인스턴스인 'placeservice'를 호출하여 'Bean'에 등록해줌.
         return PlaceService(placeRepository)      // (ver5) Data JPA 용
+    }
+
+
+    //사용자 결제 정보
+    @Autowired
+    private lateinit var payRepository : PayRepository
+
+    @Autowired
+    private lateinit var payDetailRepository : PayDetailRepository
+
+    @Bean
+    fun PayService() : PayService {
+        return PayService(payRepository, payDetailRepository)
     }
 
 

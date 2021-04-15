@@ -1,16 +1,14 @@
 package com.example.toyproject_client
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.toyproject_client.myserver.PlaceDocument
+import com.example.toyproject_client.View_Adapter.Store_RecyclerViewAdapter
 import com.example.toyproject_client.data.UserDataViewmodel
-import kotlinx.android.synthetic.main.fragment_firsthome.*
 import kotlinx.android.synthetic.main.fragment_thirdhome.recyclerView
 
 class HomeThirdFragment : Fragment() {

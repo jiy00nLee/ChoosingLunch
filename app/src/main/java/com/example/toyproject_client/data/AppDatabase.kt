@@ -5,9 +5,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.toyproject_client.data.MenuInfoData.MenuInfoDao
 import com.example.toyproject_client.data.MenuInfoData.MenuInfoEntity
+import com.example.toyproject_client.data.PaymentData.DateTypeConverter
+import com.example.toyproject_client.data.PaymentData.PaymentDao
+import com.example.toyproject_client.data.PaymentData.PaymentEntity
 import com.example.toyproject_client.data.favoriteStoreData.FavoriteStoreDao
 import com.example.toyproject_client.data.favoriteStoreData.FavoriteStoreEntity
 import com.example.toyproject_client.data.UserData.UserDataDao
@@ -16,11 +20,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
-@Database(entities = arrayOf(UserDataEntity::class, FavoriteStoreEntity::class, MenuInfoEntity::class), version = 4, exportSchema = false)
+@Database(entities = arrayOf(UserDataEntity::class, FavoriteStoreEntity::class, MenuInfoEntity::class, PaymentEntity::class), version = 7, exportSchema = false)
+@TypeConverters(DateTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun UserDataDao(): UserDataDao
     abstract fun FavoriteStoreDao() : FavoriteStoreDao
     abstract fun MenuInfoDao() : MenuInfoDao
+    abstract fun PaymentDao() : PaymentDao
 
     companion object {
         @Volatile
@@ -56,6 +62,7 @@ abstract class AppDatabase : RoomDatabase() {
                     UserDatabase(database.UserDataDao())
                     FavoriteStoreDatabase(database.FavoriteStoreDao())
                     MenuInfoDatabase(database.MenuInfoDao())
+                    PaymentDatabase(database.PaymentDao())
                 }
             }
         }
@@ -65,6 +72,7 @@ abstract class AppDatabase : RoomDatabase() {
         }
         suspend fun FavoriteStoreDatabase(favoritestoreDao : FavoriteStoreDao){ }
         suspend fun MenuInfoDatabase(menuInfoDao: MenuInfoDao) {}
+        suspend fun PaymentDatabase(paymentDao : PaymentDao ) {}
     }
 
 }

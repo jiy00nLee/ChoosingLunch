@@ -3,7 +3,6 @@ package com.example.toyproject_client
 import android.location.LocationManager
 import android.net.ConnectivityManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -14,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.toyproject_client.View_Adapter.Menu_RecyclerViewAdapter
 import com.example.toyproject_client.data.FavoriteStoreViewmodel
 import com.example.toyproject_client.data.StoreInfoViewmodel
 import com.example.toyproject_client.data.StoreMenuItem

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.toyproject_client.data.MenuInfoData.MenuInfoEntity
 import com.example.toyproject_client.data.MenuInfoData.NenuInfoRepository
 import com.example.toyproject_client.myserver.MyserverRepository
+import com.example.toyproject_client.myserver.PayInfoItem
 import com.example.toyproject_client.myserver.PlaceDocument
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +23,6 @@ class StoreInfoViewmodel (application: Application) : AndroidViewModel(applicati
         myserverRepository.getStoreMenuList(storeid)
         return myserverRepository.livedata_resultplacemenus
     }
-
     fun insertMenuInfoData(menuinfo : StoreMenuItem) = viewModelScope.launch(Dispatchers.IO) {
         menuInfoRepository.insertMenuInfoData(menuinfo)
     }

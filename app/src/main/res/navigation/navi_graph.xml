@@ -7,7 +7,8 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.toyproject_client.HomeFragment"
-        android:label="HomeFragment" >
+        android:label="HomeFragment"
+        app:startDestination="@id/action_homeFragment_to_payHistoryFragment">
         <action
             android:id="@+id/action_homeFragment_to_insertLocationInfoFragment"
             app:destination="@id/insertLocationInfoFragment" />
@@ -21,6 +22,10 @@
         <action
             android:id="@+id/action_homeFragment_to_myCartFragment"
             app:destination="@id/myCartFragment"
+            app:enterAnim="@anim/fragment_open_enter" />
+        <action
+            android:id="@+id/action_homeFragment_to_payHistoryFragment"
+            app:destination="@id/payHistoryFragment"
             app:enterAnim="@anim/fragment_open_enter" />
     </fragment>
     <fragment
@@ -67,8 +72,12 @@
             android:id="@+id/action_myCartFragment_to_homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false"/>
+        <action
+            android:id="@+id/action_myCartFragment_to_buyFragment"
+            app:destination="@id/buyFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/changingMyCartMenuFragment"
         android:name="com.example.toyproject_client.ChangingMyCartMenuFragment"
         android:label="ChangingMyCartMenuFragment" >
@@ -76,10 +85,13 @@
             android:id="@+id/action_changingMyCartMenuFragment_to_myCartFragment"
             app:popUpTo="@id/myCartFragment"
             app:popUpToInclusive="false"/>
-    </fragment>
+        <action
+            android:id="@+id/action_changingMyCartMenuFragment_to_askChangingDeleteDialogFragment"
+            app:destination="@id/askChangingDeleteDialogFragment" />
+    </dialog>
     <dialog
         android:id="@+id/askDeleteDialogFragment"
-        android:name="com.example.toyproject_client.askDeleteDialogFragment"
+        android:name="com.example.toyproject_client.View_Dialog.askDeleteDialogFragment"
         android:label="askDeleteDialogFragment" >
         <action
             android:id="@+id/action_askDeleteDialogFragment_to_storeInfoFragment"
@@ -91,7 +103,7 @@
     </dialog>
     <dialog
         android:id="@+id/askChangeLocationDialogFragment"
-        android:name="com.example.toyproject_client.askChangeLocationDialogFragment"
+        android:name="com.example.toyproject_client.View_Dialog.askChangeLocationDialogFragment"
         android:label="askChangeLocationDialogFragment" >
         <action
             android:id="@+id/action_askChangeLocationDialogFragment_to_homeFragment"
@@ -100,6 +112,56 @@
         <action
             android:id="@+id/action_askChangeLocationDialogFragment_to_insertLocationInfoFragment"
             app:popUpTo="@id/insertLocationInfoFragment"
+            app:popUpToInclusive="false"/>
+    </dialog>
+    <dialog
+        android:id="@+id/askChangingDeleteDialogFragment"
+        android:name="com.example.toyproject_client.View_Dialog.askChangingDeleteDialogFragment"
+        android:label="askChangingDeleteDialogFragment" >
+        <action
+            android:id="@+id/action_askChangingDeleteDialogFragment_to_changingMyCartMenuFragment"
+            app:popUpTo="@id/changingMyCartMenuFragment"
+            app:popUpToInclusive="false"/>
+        <action
+            android:id="@+id/action_askChangingDeleteDialogFragment_to_myCartFragment"
+            app:destination="@id/myCartFragment"
+            app:popUpToInclusive="false"/>
+    </dialog>
+    <fragment
+        android:id="@+id/buyFragment"
+        android:name="com.example.toyproject_client.BuyFragment"
+        android:label="BuyFragment" >
+        <action
+            android:id="@+id/action_buyFragment_to_askBuyMethodDialogFragment"
+            app:destination="@id/askBuyMethodDialogFragment" />
+        <action
+            android:id="@+id/action_buyFragment_to_payResultFragment"
+            app:destination="@id/payResultFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/askBuyMethodDialogFragment"
+        android:name="com.example.toyproject_client.View_Dialog.askBuyMethodDialogFragment"
+        android:label="askBuyMethodDialogFragment" >
+        <action
+            android:id="@+id/action_askBuyMethodDialogFragment_to_payResultFragment"
+            app:destination="@id/payResultFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/payResultFragment"
+        android:name="com.example.toyproject_client.PayResultFragment"
+        android:label="PayResultFragment" >
+        <action
+            android:id="@+id/action_payResultFragment_to_homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <dialog
+        android:id="@+id/payHistoryFragment"
+        android:name="com.example.toyproject_client.PayHistoryFragment"
+        android:label="PayHistoryFragment" >
+        <action
+            android:id="@+id/action_payHistoryFragment_to_homeFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="false"/>
     </dialog>
 
